@@ -1,7 +1,7 @@
 CC := g++ -std=c++11
 EXECUTABLE := utaxi.out
 
-OBJECTS := general.o data_reader.o location.o member.o user.o driver.o input_control.o
+OBJECTS := general.o data_reader.o location.o member.o passenger.o driver.o input_control.o
 
 DEFINES := defines.hpp
 UTAXI := code/utaxi
@@ -10,7 +10,7 @@ DATA_READER := code/data_reader
 LOCATION := code/location
 
 MEMBER := code/member
-USER := code/user
+PASSENGER := code/passenger
 DRIVER := code/driver
 
 INPUT_CONTROL := code/input_control
@@ -38,8 +38,8 @@ location.o: ${LOCATION}.cpp ${LOCATION}.hpp ${DEFINES}
 member.o: ${MEMBER}.cpp ${MEMBER}.hpp ${DEFINES}
 	${CC} -c ${MEMBER}.cpp -o member.o
 
-user.o: ${MEMBER}.hpp ${USER}.cpp ${USER}.hpp ${DEFINES}
-	${CC} -c ${USER}.cpp -o user.o
+passenger.o: ${MEMBER}.hpp ${PASSENGER}.cpp ${PASSENGER}.hpp ${DEFINES}
+	${CC} -c ${PASSENGER}.cpp -o passenger.o
 
 driver.o: ${MEMBER}.hpp ${DRIVER}.cpp ${DRIVER}.hpp ${DEFINES}
 	${CC} -c ${DRIVER}.cpp -o driver.o

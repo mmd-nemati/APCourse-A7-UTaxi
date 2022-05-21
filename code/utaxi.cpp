@@ -26,9 +26,9 @@ void Utaxi::run()
     while(true)
     {
         input.receive();
-        //if(input.detect_command() == command::GET)
+        //if(input.detect_command() == Command::GET)
         //   std::cout << "yes" << std::endl;
-        if (input.detect_command() == command::POST)
+        if (input.detect_command() == Command::POST)
             post();
             //std::cout << "post" << std::endl;
     }
@@ -36,5 +36,39 @@ void Utaxi::run()
 
 void Utaxi::post()
 {
-    input.post_command_handle();
+    Command::AppCommand command = input.post_command_handle();
+    if(command == Command::SIGNUP)
+        signup();
+}
+
+void Utaxi::signup()
+{
+    SignupCredentials new_signup = input.get_signup_credentials();
+    try
+    {
+        check_user_exist(new_signup);
+        check_signup_role(new_signup);
+    }
+    catch(std::runtime_error& er)
+    {
+        std::cerr << er.what() << std::endl;
+        return;
+    }
+    if(new_signup.role == "driver")
+        members.push_back(new Driver(new_signup.username));
+    if(new_signup.role == "passenger")
+        members.push_back(new Passenger(new_signup.username));
+}
+
+void Utaxi::check_user_exist(SignupCredentials new_signup)
+{
+    for(int i = 0; i < members.size(); i++)
+        if(members[i]->is_same_as(new_signup.username))
+            throw std::runtime_error("Bad Request");
+}
+
+void Utaxi::check_signup_role(SignupCredentials new_signup)
+{
+    if(new_signup.role != "driver" && new_signup.role != "passenger")
+        throw std::runtime_error("Bad Request");
 }

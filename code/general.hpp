@@ -7,4 +7,9 @@
 #include "../defines.hpp"
 
 std::vector<std::string> parse_line(std::string line, std::string delimiter);
+struct SignupCredentials 
+{
+    std::string username;
+    std::string role;
+};
 #endif /* __GENERAL_H__ */

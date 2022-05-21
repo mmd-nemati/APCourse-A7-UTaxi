@@ -7,6 +7,7 @@ class Member
 {
     public:
         Member() {};
+        bool is_same_as(std::string new_username);
         // to implement
 
     protected:

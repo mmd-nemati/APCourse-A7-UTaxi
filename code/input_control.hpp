@@ -10,15 +10,13 @@ class InputControl
     public:
         InputControl();
         void receive();
-        command::WebCommand detect_command();
-        void post_command_handle();
-       // void 
-        // to implement
+        Command::WebCommand detect_command();
+        Command::AppCommand post_command_handle();
+        SignupCredentials get_signup_credentials();
     
     private:
         std::string line;
         std::vector<std::string> tokens;
-        // to implement
 };
 
 #endif /* __INPUT_CONTROL_H__ */

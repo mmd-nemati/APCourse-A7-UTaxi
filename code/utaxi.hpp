@@ -8,7 +8,8 @@
 #include "location.hpp"
 #include "input_control.hpp"
 #include "member.hpp"
-
+#include "driver.hpp"
+#include "passenger.hpp"
 class Utaxi
 {
     public:
@@ -16,6 +17,9 @@ class Utaxi
         void gather_loc_data(std::string file_address);
         void run();
         void post();
+        void signup();
+        void check_user_exist(SignupCredentials new_signup);
+        void check_signup_role(SignupCredentials new_signup);
         // to implement
 
     private:
