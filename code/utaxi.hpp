@@ -7,6 +7,7 @@
 #include "data_reader.hpp"
 #include "location.hpp"
 #include "input_control.hpp"
+#include "member.hpp"
 
 class Utaxi
 {
@@ -18,10 +19,10 @@ class Utaxi
         // to implement
 
     private:
-        std::vector<Location*> locations;
         InputControl input;
-        //InputControl input;
-        // to implement
+        std::vector<Location*> locations;
+        std::vector<Member*> members;
+
 };
 
 #endif /* __UTAXI_H__ */
