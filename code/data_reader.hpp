@@ -6,6 +6,7 @@
 #include <fstream>
 
 #include "../defines.hpp"
+#include "general.hpp"
 
 class DataReader
 {

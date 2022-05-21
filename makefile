@@ -1,12 +1,14 @@
 CC := g++ -std=c++11
 EXECUTABLE := utaxi.out
 
-OBJECTS := data_reader.o location.o
+OBJECTS := general.o data_reader.o location.o input_control.o
 
 DEFINES := defines.hpp
 UTAXI := code/utaxi
+GENERAL := code/general
 DATA_READER := code/data_reader
 LOCATION := code/location
+INPUT_CONTROL := code/input_control
 
 all: ${EXECUTABLE}
 
@@ -19,8 +21,18 @@ main.o: main.cpp utaxi.o
 utaxi.o: ${UTAXI}.cpp ${UTAXI}.hpp ${DEFINES} ${OBJECTS}
 	${CC} -c ${UTAXI}.cpp -o utaxi.o
 
+general.o: ${GENERAL}.cpp ${GENERAL}.hpp ${DEFINES}
+	${CC} -c ${GENERAL}.cpp -o general.o
+
 data_reader.o: ${DATA_READER}.cpp ${DATA_READER}.hpp ${DEFINES}
 	${CC} -c ${DATA_READER}.cpp -o data_reader.o
 
 location.o: ${LOCATION}.cpp ${LOCATION}.hpp ${DEFINES}
 	${CC} -c ${LOCATION}.cpp -o location.o
+
+input_control.o: ${INPUT_CONTROL}.cpp ${INPUT_CONTROL}.hpp ${DEFINES}
+	${CC} -c ${INPUT_CONTROL}.cpp -o input_control.o
+
+.PHONY: clean
+clean:
+	rm -r *.o

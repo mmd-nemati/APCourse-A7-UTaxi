@@ -22,15 +22,8 @@ void DataReader::read(std::string file_address)
 std::vector<std::string> DataReader::provide_loc_raw_data(int index)
 {
     std::vector<std::string> tokens;
-    size_t pos = 0;
-    std::string line = locs_raw_data[index];
-    while ((pos = line.find(TOKENS_DELIMITER)) != std::string::npos) 
-    {
-        tokens.push_back(line.substr(0, pos));
-        line.erase(0, pos + TOKENS_DELIMITER.length());
-    }
-    tokens.push_back(line.substr(0, pos));
-
+    tokens = parse_line(locs_raw_data[index], LOCATION_TOKENS_DELIMITER);
+  
     return tokens;
 }
 

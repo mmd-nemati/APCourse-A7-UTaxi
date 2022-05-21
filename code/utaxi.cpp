@@ -1,5 +1,5 @@
+#include <iostream>
 #include "utaxi.hpp"
-
 Utaxi::Utaxi()
 {
     ;
@@ -16,4 +16,25 @@ void Utaxi::gather_loc_data(std::string file_address)
         Location* new_loc = new Location(tokens[0], stod(tokens[1]), stod(tokens[2]));
         locations.push_back(new_loc);
     }
+
+   // for(auto x : locations)
+   //     std::cout << x->get_name() << std::endl;
+}
+
+void Utaxi::run()
+{
+    while(true)
+    {
+        input.receive();
+        //if(input.detect_command() == command::GET)
+        //   std::cout << "yes" << std::endl;
+        if (input.detect_command() == command::POST)
+            post();
+            //std::cout << "post" << std::endl;
+    }
+}
+
+void Utaxi::post()
+{
+    input.post_command_handle();
 }

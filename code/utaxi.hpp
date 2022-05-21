@@ -6,16 +6,21 @@
 
 #include "data_reader.hpp"
 #include "location.hpp"
+#include "input_control.hpp"
 
 class Utaxi
 {
     public:
         Utaxi();
         void gather_loc_data(std::string file_address);
+        void run();
+        void post();
         // to implement
 
     private:
         std::vector<Location*> locations;
+        InputControl input;
+        //InputControl input;
         // to implement
 };
 
