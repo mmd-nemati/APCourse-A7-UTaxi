@@ -5,7 +5,7 @@
 #include <string>
 #include <fstream>
 
-#include "defines.hpp"
+#include "../defines.hpp"
 
 class DataReader
 {
