@@ -4,15 +4,13 @@
 #include <string>
 
 #include "member.hpp"
+#include "../defines.hpp"
 
 class Passenger : public Member
 {
     public:
         Passenger() {};
         Passenger(std::string _username);
-
-    //private:
-
-
+        virtual bool is_passenger() { return true; }
 };
 #endif /* __PASSENGER_H__ */

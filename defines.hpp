@@ -11,6 +11,8 @@ const std::string DELETE = "DELETE";
 const std::string TRIP_WAITING = "waiting";
 const std::string TRIP_TRAVELING = "traveling";
 const std::string TRIP_FINISHED = "finished";
+constexpr bool MEMBER_TRAVELING = true;
+constexpr bool MEMBER_NOT_TRAVELING = false;
 
 namespace Command
 {

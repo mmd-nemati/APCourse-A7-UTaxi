@@ -58,3 +58,17 @@ SignupCredentials InputControl::get_signup_credentials()
     return new_signup;
 }
 
+TripRequestTokens InputControl::get_trip_tokens()
+{
+    TripRequestTokens new_trip;
+    for(int i = 3; i < tokens.size()-1; i++)
+    {
+        if(tokens[i] == "username")
+            new_trip.username = tokens[i+1];
+        if(tokens[i] == "origin")
+            new_trip.origin_name = tokens[i+1];
+        if(tokens[i] == "destination")
+            new_trip.destination_name = tokens[i+1];
+    }
+    return new_trip;
+}

@@ -3,20 +3,22 @@
 
 #include <string>
 #include "location.hpp"
+#include "member.hpp"
 #include "../defines.hpp"
 
 class Trip
 {
     public:
         Trip() {};
-        Trip(std::string _passenger_name, Location _origin, Location _destination);
+        Trip(Member* _passenger, Location* _origin, Location* _destination, int _id);
         // to implement
 
     private:
-        std::string passenger_name;
-        Location origin;
-        Location destination;
+        Member* passenger;
+        Location* origin;
+        Location* destination;
         std::string status;
+        int trip_id;
 };
 
 #endif /* __TRIP_H__ */

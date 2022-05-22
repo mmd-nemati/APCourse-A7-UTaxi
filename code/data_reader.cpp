@@ -13,10 +13,10 @@ void DataReader::read(std::string file_address)
     std::getline(locs_data_file, line);
 
     while(getline(locs_data_file, line))
-        {
-            locs_raw_data.push_back(line);
-            locs_num++;
-        }
+    {
+        locs_raw_data.push_back(line);
+        locs_num++;
+    }
 }
 
 std::vector<std::string> DataReader::provide_loc_raw_data(int index)

@@ -13,7 +13,7 @@ class InputControl
         Command::WebCommand detect_command();
         Command::AppCommand post_command_handle();
         SignupCredentials get_signup_credentials();
-    
+        TripRequestTokens get_trip_tokens();
     private:
         std::string line;
         std::vector<std::string> tokens;

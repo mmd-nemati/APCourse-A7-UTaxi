@@ -10,6 +10,7 @@ class Driver : public Member
     public:
         Driver() {};
         Driver(std::string _username);
+        virtual bool is_passenger() { return false; }
 };
 
 #endif /* __DRIVER_H__ */

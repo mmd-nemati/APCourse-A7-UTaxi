@@ -11,3 +11,8 @@ Location::Location(std::string _name, double _lat, double _long)
     latitude = _lat;
     longitude = _long;
 }
+
+bool Location::is_same_as(std::string check_loc)
+{
+    return (name == check_loc);
+}

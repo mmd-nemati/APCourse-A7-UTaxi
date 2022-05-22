@@ -1,9 +1,10 @@
 #include "trip.hpp"
 
-Trip::Trip(std::string _passenger_name, Location _origin, Location _destination)
+Trip::Trip(Member* _passenger, Location* _origin, Location* _destination, int _id)
 {
-    passenger_name = _passenger_name;
+    passenger = _passenger;
     origin = _origin;
     destination = _destination;
     status = TRIP_WAITING;
+    trip_id = _id;
 }

@@ -28,7 +28,7 @@ main.o: main.cpp utaxi.o
 utaxi.o: ${UTAXI}.cpp ${UTAXI}.hpp ${DEFINES} ${OBJECTS}
 	${CC} -c ${UTAXI}.cpp -o utaxi.o
 
-general.o: ${GENERAL}.cpp ${GENERAL}.hpp ${DEFINES}
+general.o: ${LOCATION}.hpp ${GENERAL}.cpp ${GENERAL}.hpp ${DEFINES}
 	${CC} -c ${GENERAL}.cpp -o general.o
 
 data_reader.o: ${DATA_READER}.cpp ${DATA_READER}.hpp ${DEFINES}
@@ -48,7 +48,7 @@ driver.o: ${MEMBER}.hpp ${DRIVER}.cpp ${DRIVER}.hpp ${DEFINES}
 
 trip.o: ${TRIP}.cpp ${TRIP}.hpp ${DEFINES}
 	${CC} -c ${TRIP}.cpp -o trip.o
-	
+
 input_control.o: ${INPUT_CONTROL}.cpp ${INPUT_CONTROL}.hpp ${DEFINES}
 	${CC} -c ${INPUT_CONTROL}.cpp -o input_control.o
 
