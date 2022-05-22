@@ -39,6 +39,8 @@ Command::AppCommand InputControl::post_command_handle()
 {
     if(tokens[1] == "signup")
         return Command::SIGNUP;
+    else if(tokens[1] == "trips")
+        return Command::TRIPS;
     
     return Command::A_NONE;
 }
@@ -46,10 +48,13 @@ Command::AppCommand InputControl::post_command_handle()
 SignupCredentials InputControl::get_signup_credentials()
 {
     SignupCredentials new_signup;
-    if(tokens[4] == "driver")
-        new_signup = {tokens[3], "driver"};
-    else if(tokens[4] == "passenger")
-        new_signup = {tokens[3], "passenger"};
-
+    for(int i = 3; i < tokens.size()-1; i++)
+    {
+        if(tokens[i] == "username")
+            new_signup.username = tokens[i+1];
+        if(tokens[i] == "role")
+            new_signup.role = tokens[i+1];
+    }
     return new_signup;
 }
+
