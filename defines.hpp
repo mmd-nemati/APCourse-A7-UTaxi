@@ -8,6 +8,9 @@ const std::string COMMAND_TOKENS_DELIMITER = " ";
 const std::string GET = "GET";
 const std::string POST = "POST";
 const std::string DELETE = "DELETE";
+const std::string TRIP_WAITING = "waiting";
+const std::string TRIP_TRAVELING = "traveling";
+const std::string TRIP_FINISHED = "finished";
 
 namespace Command
 {
@@ -28,5 +31,6 @@ namespace Command
         FINISH = 4
     };
 }
+
 
 #endif /* __DEFINES_H__ */

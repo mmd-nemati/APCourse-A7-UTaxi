@@ -37,7 +37,7 @@ Command::WebCommand InputControl::detect_command()
 
 Command::AppCommand InputControl::post_command_handle()
 {
-    if(tokens[2] == "signup")
+    if(tokens[1] == "signup")
         return Command::SIGNUP;
     
     return Command::A_NONE;

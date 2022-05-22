@@ -10,6 +10,8 @@
 #include "member.hpp"
 #include "driver.hpp"
 #include "passenger.hpp"
+#include "trip.hpp"
+
 class Utaxi
 {
     public:
@@ -20,12 +22,12 @@ class Utaxi
         void signup();
         void check_user_exist(SignupCredentials new_signup);
         void check_signup_role(SignupCredentials new_signup);
-        // to implement
 
     private:
         InputControl input;
         std::vector<Location*> locations;
         std::vector<Member*> members;
+        std::vector<Trip*> trips;
 
 };
 

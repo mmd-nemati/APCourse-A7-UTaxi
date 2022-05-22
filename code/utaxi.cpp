@@ -58,6 +58,7 @@ void Utaxi::signup()
         members.push_back(new Driver(new_signup.username));
     if(new_signup.role == "passenger")
         members.push_back(new Passenger(new_signup.username));
+    std::cout << "OK" << std::endl;
 }
 
 void Utaxi::check_user_exist(SignupCredentials new_signup)
