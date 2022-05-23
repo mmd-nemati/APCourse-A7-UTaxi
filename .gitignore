@@ -33,3 +33,6 @@
 
 # VScode files
 *.vscode
+
+# Directories
+/Testcases

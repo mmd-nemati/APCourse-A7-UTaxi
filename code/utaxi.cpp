@@ -23,16 +23,16 @@ void Utaxi::gather_loc_data(std::string file_address)
 
 void Utaxi::run()
 {
-    while(true)
+    while(input.receive())
     {
         try
         {
-            input.receive();
-
             if (input.detect_command() == WebCommand::POST)
                 post();
             else if(input.detect_command() == WebCommand::GET)
                 get();
+            else if(input.detect_command() == WebCommand::DELETE)
+                web_delete();
             else if (input.detect_command() == WebCommand::W_NONE)
                 break;
         }
@@ -69,6 +69,12 @@ void Utaxi::get()
         throw std::runtime_error("Not Found");
 }
 
+void Utaxi::web_delete()
+{
+    DELETECommand::Command command = input.delete_command_handle();
+    if(command == DELETECommand::TRIPS)
+        delete_trip();
+}
 void Utaxi::signup()
 {
     SignupCredentials new_signup = input.send_signup_credentials();
@@ -131,6 +137,20 @@ void Utaxi::trip_data()
     check_trip_is_available(new_trip_data_tokens.id);
     output.trip_data(trips[find_trip_index(new_trip_data_tokens.id)]);
 }
+
+void Utaxi::delete_trip()
+{
+    TripIntractTokens new_delete_trip_tokens = input.send_delete_trip_tokens();
+    check_trip_is_available(new_delete_trip_tokens.id);
+    check_trip_is_deleted(new_delete_trip_tokens.id);
+    check_trip_is_started(new_delete_trip_tokens.id);
+    check_trip_is_finished(new_delete_trip_tokens.id);
+    check_delete_another_user_trip(new_delete_trip_tokens);
+
+    trips[find_trip_index(new_delete_trip_tokens.id)]->delete_yourself();
+    output.done();
+}
+
 void Utaxi::check_user_exist(SignupCredentials new_signup)
 {
     for(int i = 0; i < members.size(); i++)
@@ -250,6 +270,31 @@ void Utaxi::check_trip_is_available(int _id)
     if(find_trip_index(_id) == -1)
         throw std::runtime_error("Not Found");
 }
+
+void Utaxi::check_trip_is_deleted(int _id)
+{
+    if(trips[find_trip_index(_id)]->is_deleted())
+        throw std::runtime_error("Not Found");
+}
+
+void Utaxi::check_trip_is_started(int _id)
+{
+    if(trips[find_trip_index(_id)]->is_started())
+        throw std::runtime_error("Bad Request");
+}
+
+void Utaxi::check_trip_is_finished(int _id)
+{
+    if(trips[find_trip_index(_id)]->is_finished())
+        throw std::runtime_error("Bad Request");
+}
+
+void Utaxi::check_delete_another_user_trip(TripIntractTokens new_delete_trip_tokens)
+{
+    if(!find_passenger_by_trip(new_delete_trip_tokens.id)->is_same_as(new_delete_trip_tokens.username))
+        throw std::runtime_error("Permission Denied");
+}
+
 int Utaxi::find_member_index(std::string member_name)
 {
     for(int i = 0; i < members.size(); i++)

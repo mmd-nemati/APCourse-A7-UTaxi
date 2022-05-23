@@ -55,7 +55,7 @@ namespace DELETECommand
     enum Command
     {
         D_NONE,
-        TRIP
+        TRIPS
     };
 }
 /*namespace Command

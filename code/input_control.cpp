@@ -7,10 +7,14 @@ InputControl::InputControl()
     ;
 }
 
-void InputControl::receive()
+bool InputControl::receive()
 {
-    std::getline(std::cin, line);
-    tokens = parse_line(line, COMMAND_TOKENS_DELIMITER);
+    if(std::getline(std::cin, line))
+    {
+        tokens = parse_line(line, COMMAND_TOKENS_DELIMITER);
+        return true;
+    }
+    return false;
 }
 
 WebCommand::Command InputControl::detect_command()
@@ -52,6 +56,14 @@ GETCommand::Command InputControl::get_command_handle()
         return GETCommand::TRIP_DATA;
     
     return GETCommand::G_NONE;
+}
+
+DELETECommand::Command InputControl::delete_command_handle()
+{
+    if(tokens[1] == "trips")
+        return DELETECommand::TRIPS;
+
+    return DELETECommand::D_NONE;
 }
 
 SignupCredentials InputControl::send_signup_credentials()
@@ -96,6 +108,19 @@ TripIntractTokens InputControl::send_accpet_finish_tokens()
 }
 
 TripIntractTokens InputControl::send_get_trips_tokens()
+{
+    TripIntractTokens new_tokens;
+    for(int i = 3; i < tokens.size(); i++)
+    {
+        if(tokens[i] == "username")
+            new_tokens.username = tokens[i+1];
+        if(tokens[i] == "id")
+            new_tokens.id = stoi(tokens[i+1]);
+    }
+    return new_tokens;
+}
+
+TripIntractTokens InputControl::send_delete_trip_tokens()
 {
     TripIntractTokens new_tokens;
     for(int i = 3; i < tokens.size(); i++)
