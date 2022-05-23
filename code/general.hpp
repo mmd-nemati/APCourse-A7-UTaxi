@@ -20,7 +20,7 @@ struct TripRequestTokens
     std::string destination_name = "NULL";
 };
 
-struct AccpetTokens
+struct AccpetFinishTokens
 {
     std::string username = "NULL";
     int id = -1;

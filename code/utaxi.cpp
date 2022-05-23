@@ -36,14 +36,25 @@ void Utaxi::run()
 
 void Utaxi::post()
 {
-    Command::AppCommand command = input.post_command_handle();
-    if(command == Command::SIGNUP)
-        signup();
-    if(command == Command::TRIPS)
-        post_trips();
-    if(command == Command::ACCEPT)
-        accept();
-        
+    try
+    {
+        Command::AppCommand command = input.post_command_handle();
+        if(command == Command::SIGNUP)
+            signup();
+        else if(command == Command::TRIPS)
+            post_trips();
+        else if(command == Command::ACCEPT)
+            accept();
+        else if(command == Command::FINISH)
+            finish();
+        else
+            throw std::runtime_error("Not Found");
+    }
+    catch(std::runtime_error& er)
+    {
+        std::cout << er.what() << std::endl;
+        return;
+    }
 }
 
 void Utaxi::signup()
@@ -88,7 +99,7 @@ void Utaxi::post_trips()
 
 void Utaxi::accept()
 {
-    AccpetTokens new_accpet_tokens = input.get_accpet_tokens();
+    AccpetFinishTokens new_accpet_tokens = input.get_accpet_finish_tokens();
     try
     {
         check_accept_errors(new_accpet_tokens);
@@ -102,6 +113,24 @@ void Utaxi::accept()
     find_passenger_by_trip(new_accpet_tokens.id)->start_to_travel();
     members[find_member_index(new_accpet_tokens.username)]->start_to_travel();
     trips[find_trip_index(new_accpet_tokens.id)]->start();
+}
+
+void Utaxi::finish()
+{
+    AccpetFinishTokens new_finish_tokens = input.get_accpet_finish_tokens();
+    try
+    {
+        check_finish_errors(new_finish_tokens);
+    }
+    catch(std::runtime_error& er)
+    {
+        std::cerr << er.what() << std::endl;
+        return;
+    }
+    std::cout << "OK" << std::endl;
+    find_passenger_by_trip(new_finish_tokens.id)->stop_travel();
+    members[find_member_index(new_finish_tokens.username)]->stop_travel();
+    trips[find_trip_index(new_finish_tokens.id)]->finish();
 }
 
 void Utaxi::check_user_exist(SignupCredentials new_signup)
@@ -122,14 +151,21 @@ void Utaxi::check_post_trips_errors(TripRequestTokens new_trip_tokens)
     check_new_trip_arguments(new_trip_tokens);
     check_new_trip_tokens_not_found(new_trip_tokens);
     check_is_passenger(new_trip_tokens.username);
-    check_member_travel_status(new_trip_tokens.username);
+    check_member_traveling(new_trip_tokens.username);
 }
 
-void Utaxi::check_accept_errors(AccpetTokens new_accpet_tokens)
+void Utaxi::check_accept_errors(AccpetFinishTokens new_accpet_tokens)
 {
-    check_accept_tokens_not_found(new_accpet_tokens);
+    check_accept_finish_tokens_not_found(new_accpet_tokens);
     check_is_driver(new_accpet_tokens.username);
-    check_member_travel_status(new_accpet_tokens.username);
+    check_member_traveling(new_accpet_tokens.username);
+}
+
+void Utaxi::check_finish_errors(AccpetFinishTokens new_finish_tokens)
+{
+    check_accept_finish_tokens_not_found(new_finish_tokens);
+    check_is_driver(new_finish_tokens.username);
+    check_member_not_traveling(new_finish_tokens.username);
 }
 
 void Utaxi::check_new_trip_arguments(TripRequestTokens new_trip_tokens)
@@ -159,9 +195,15 @@ void Utaxi::check_new_trip_tokens_not_found(TripRequestTokens new_trip_tokens)
         throw std::runtime_error("Not Found");
 }  
 
-void Utaxi::check_member_travel_status(std::string _username)
+void Utaxi::check_member_traveling(std::string _username)
 {
     if(members[find_member_index(_username)]->is_traveling())
+        throw std::runtime_error("Bad Request");
+}
+
+void Utaxi::check_member_not_traveling(std::string _username)
+{
+    if(!members[find_member_index(_username)]->is_traveling())
         throw std::runtime_error("Bad Request");
 }
 
@@ -171,7 +213,7 @@ void Utaxi::check_is_passenger(std::string _username)
         throw std::runtime_error("Permission Denied");
 }
 
-void Utaxi::check_accept_tokens_not_found(AccpetTokens new_accpet_tokens)
+void Utaxi::check_accept_finish_tokens_not_found(AccpetFinishTokens new_accpet_tokens)
 {
     bool user_exist = false;
     bool trip_exist = false;

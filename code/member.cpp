@@ -14,3 +14,8 @@ void Member::start_to_travel()
 {
     status = MEMBER_TRAVELING;
 } 
+
+void Member::stop_travel()
+{
+    status = MEMBER_NOT_TRAVELING;
+}

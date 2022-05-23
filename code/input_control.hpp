@@ -14,7 +14,7 @@ class InputControl
         Command::AppCommand post_command_handle();
         SignupCredentials get_signup_credentials();
         TripRequestTokens get_trip_tokens();
-        AccpetTokens get_accpet_tokens();
+        AccpetFinishTokens get_accpet_finish_tokens();
     private:
         std::string line;
         std::vector<std::string> tokens;

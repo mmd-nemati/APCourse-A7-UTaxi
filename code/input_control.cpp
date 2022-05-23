@@ -43,7 +43,9 @@ Command::AppCommand InputControl::post_command_handle()
         return Command::TRIPS;
     else if(tokens[1] == "accept")
         return Command::ACCEPT;
-    
+    else if(tokens[1] == "finish")
+        return Command::FINISH;
+
     return Command::A_NONE;
 }
 
@@ -75,15 +77,15 @@ TripRequestTokens InputControl::get_trip_tokens()
     return new_trip;
 }
 
-AccpetTokens InputControl::get_accpet_tokens()
+AccpetFinishTokens InputControl::get_accpet_finish_tokens()
 {
-    AccpetTokens new_accpet;
+    AccpetFinishTokens new_tokens;
     for(int i = 3; i < tokens.size(); i++)
     {
         if(tokens[i] == "username")
-            new_accpet.username = tokens[i+1];
+            new_tokens.username = tokens[i+1];
         if(tokens[i] == "id")
-            new_accpet.id = stoi(tokens[i+1]);
+            new_tokens.id = stoi(tokens[i+1]);
     }
-    return new_accpet;
+    return new_tokens;
 }

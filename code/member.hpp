@@ -11,6 +11,7 @@ class Member
         Member() {};
         bool is_same_as(std::string new_username);
         void start_to_travel();
+        void stop_travel();
         bool is_traveling();
         virtual bool is_passenger() = 0;
         virtual bool is_driver() = 0;

@@ -18,3 +18,8 @@ void Trip::start()
 {
     status = TRIP_TRAVELING;
 }
+
+void Trip::finish()
+{
+    status = TRIP_FINISHED;
+}
