@@ -16,9 +16,6 @@ void Utaxi::gather_loc_data(std::string file_address)
         Location* new_loc = new Location(tokens[0], stod(tokens[1]), stod(tokens[2]));
         locations.push_back(new_loc);
     }
-
-   // for(auto x : locations)
-   //     std::cout << x->get_name() << std::endl;
 }
 
 void Utaxi::run()
@@ -167,14 +164,15 @@ void Utaxi::check_signup_role(SignupCredentials new_signup)
 void Utaxi::check_post_trips_errors(TripRequestTokens new_trip_tokens)
 {
     check_new_trip_arguments(new_trip_tokens);
-    check_new_trip_tokens_not_found(new_trip_tokens);
+    check_member_is_available(new_trip_tokens.username);
+    check_location_is_available(new_trip_tokens.origin_name);
+    check_location_is_available(new_trip_tokens.destination_name);
     check_is_passenger(new_trip_tokens.username);
     check_member_traveling(new_trip_tokens.username);
 }
 
 void Utaxi::check_accept_errors(TripIntractTokens new_accpet_tokens)
 {
-    //check_accept_finish_tokens_not_found(new_accpet_tokens);
     check_member_is_available(new_accpet_tokens.username);
     check_trip_is_available(new_accpet_tokens.id);
     check_is_driver(new_accpet_tokens.username);
@@ -183,7 +181,6 @@ void Utaxi::check_accept_errors(TripIntractTokens new_accpet_tokens)
 
 void Utaxi::check_finish_errors(TripIntractTokens new_finish_tokens)
 {
-    //check_accept_finish_tokens_not_found(new_finish_tokens);
     check_member_is_available(new_finish_tokens.username);
     check_trip_is_available(new_finish_tokens.id);
     check_is_driver(new_finish_tokens.username);
@@ -196,26 +193,6 @@ void Utaxi::check_new_trip_arguments(TripRequestTokens new_trip_tokens)
         new_trip_tokens.destination_name == "NULL")
             throw std::runtime_error("Bad Request");
 }
-
-void Utaxi::check_new_trip_tokens_not_found(TripRequestTokens new_trip_tokens)
-{
-    bool user_exist = false;
-    bool origin_exist = false;
-    bool destination_exist = false;
-     for(int i = 0; i < members.size(); i++)
-        if(members[i]->is_same_as(new_trip_tokens.username))
-            user_exist = true;
-    
-    for(int i = 0; i < locations.size(); i++)
-        if(locations[i]->is_same_as(new_trip_tokens.origin_name))
-            origin_exist = true;
-    for(int i = 0; i < locations.size(); i++)
-        if(locations[i]->is_same_as(new_trip_tokens.destination_name))
-            destination_exist = true;
-
-    if(user_exist == false || destination_exist == false || origin_exist == false)
-        throw std::runtime_error("Not Found");
-}  
 
 void Utaxi::check_member_traveling(std::string _username)
 {
@@ -235,24 +212,6 @@ void Utaxi::check_is_passenger(std::string _username)
         throw std::runtime_error("Permission Denied");
 }
 
-//void Utaxi::check_accept_finish_tokens_not_found(TripIntractTokens new_accpet_tokens)
-//{
-    /*bool user_exist = false;
-    bool trip_exist = false;
-    if(find_member_index(new_accpet_tokens.username) == -1)
-    for(int i = 0; i < members.size(); i++)
-        if(members[i]->is_same_as(new_accpet_tokens.username))
-            user_exist = true;
-
-    if(find_trip_index(new_accpet_tokens.id) != -1)
-            trip_exist = true;
-    */
-    //if(find_trip_index(new_accpet_tokens.id) == -1 || 
-      //  find_member_index(new_accpet_tokens.username) == -1)
-        //    throw std::runtime_error("Not Found");
-//}*/
-
-
 void Utaxi::check_is_driver(std::string _username)
 {
     if(members[find_member_index(_username)]->is_driver() == false)
@@ -262,6 +221,12 @@ void Utaxi::check_is_driver(std::string _username)
 void Utaxi::check_member_is_available(std::string _username)
 {
     if(find_member_index(_username) == -1)
+        throw std::runtime_error("Not Found");
+}
+
+void Utaxi::check_location_is_available(std::string loc_name)
+{
+    if(find_location_index(loc_name) == -1)
         throw std::runtime_error("Not Found");
 }
 

@@ -35,7 +35,6 @@ class Utaxi
         void check_user_exist(SignupCredentials new_signup);
         void check_signup_role(SignupCredentials new_signup);
         void check_new_trip_arguments(TripRequestTokens new_trip_tokens);
-        void check_new_trip_tokens_not_found(TripRequestTokens new_trip_tokens);
         void check_member_traveling(std::string _username);
         void check_member_not_traveling(std::string _username);
         void check_is_passenger(std::string _username);
@@ -50,6 +49,7 @@ class Utaxi
         void check_trip_is_finished(int _id);
         void check_delete_another_user_trip(TripIntractTokens new_delete_trip_tokens);
         void check_member_is_available(std::string username);
+        void check_location_is_available(std::string loc_name);
         //void travel_begins(TripRequestTokens new_trip_tokens);
         int find_member_index(std::string member_name);
         int find_location_index(std::string location_name);
