@@ -32,9 +32,9 @@ class Utaxi
         void check_is_passenger(std::string _username);
         void check_is_driver(std::string _username);
         void check_post_trips_errors(TripRequestTokens new_trip_tokens);
-        void check_accept_finish_tokens_not_found(AccpetFinishTokens new_tokens);
-        void check_accept_errors(AccpetFinishTokens new_accept_tokens);
-        void check_finish_errors(AccpetFinishTokens new_finish_tokens);
+        void check_accept_finish_tokens_not_found(TripIntractTokens new_tokens);
+        void check_accept_errors(TripIntractTokens new_accept_tokens);
+        void check_finish_errors(TripIntractTokens new_finish_tokens);
         //void travel_begins(TripRequestTokens new_trip_tokens);
         int find_member_index(std::string member_name);
         int find_location_index(std::string location_name);

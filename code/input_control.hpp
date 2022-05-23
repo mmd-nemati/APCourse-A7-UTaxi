@@ -10,11 +10,13 @@ class InputControl
     public:
         InputControl();
         void receive();
-        Command::WebCommand detect_command();
-        Command::AppCommand post_command_handle();
-        SignupCredentials get_signup_credentials();
-        TripRequestTokens get_trip_tokens();
-        AccpetFinishTokens get_accpet_finish_tokens();
+        WebCommand::Command detect_command();
+        POSTCommand::Command post_command_handle();
+        GETCommand::Command get_command_handle();
+
+        SignupCredentials send_signup_credentials();
+        TripRequestTokens send_trip_req_tokens();
+        TripIntractTokens send_accpet_finish_tokens();
     private:
         std::string line;
         std::vector<std::string> tokens;

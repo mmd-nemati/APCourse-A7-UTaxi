@@ -14,7 +14,48 @@ const std::string TRIP_FINISHED = "finished";
 constexpr bool MEMBER_TRAVELING = true;
 constexpr bool MEMBER_NOT_TRAVELING = false;
 
-namespace Command
+namespace WebCommand
+{
+    enum Command
+    {
+        W_NONE,
+        GET,
+        POST,
+        DELETE 
+    };
+}
+
+namespace POSTCommand
+{
+    enum Command
+    {
+        P_NONE,
+        SIGNUP,
+        REQUEST,
+        ACCEPT,
+        FINISH
+    };
+}
+
+namespace GETCommand
+{
+    enum Command
+    {
+        G_NONE,
+        TRIPS_LIST,
+        TRIP_DATA
+    };
+}
+
+namespace DELETECommand
+{
+    enum Command
+    {
+        D_NONE,
+        TRIP
+    };
+}
+/*namespace Command
 {
     enum WebCommand
     {
@@ -30,9 +71,9 @@ namespace Command
         SIGNUP = 1,
         TRIPS = 2,
         ACCEPT = 3,
-        FINISH = 4
+        FINISH = 4,
     };
 }
 
-
+*/
 #endif /* __DEFINES_H__ */

@@ -13,16 +13,16 @@ void InputControl::receive()
     tokens = parse_line(line, COMMAND_TOKENS_DELIMITER);
 }
 
-Command::WebCommand InputControl::detect_command()
+WebCommand::Command InputControl::detect_command()
 {
     try
     {
         if(tokens[0] == GET)
-            return Command::GET;
+            return WebCommand::GET;
         else if(tokens[0] == POST)
-            return Command::POST;
+            return WebCommand::POST;
         else if(tokens[0] == DELETE)
-            return Command::DELETE;
+            return WebCommand::DELETE;
         
         else
             throw std::runtime_error("Bad Request");
@@ -32,24 +32,24 @@ Command::WebCommand InputControl::detect_command()
         std::cerr << er.what() << std::endl;
     }
 
-    return Command::W_NONE;
+    return WebCommand::W_NONE;
 }
 
-Command::AppCommand InputControl::post_command_handle()
+POSTCommand::Command InputControl::post_command_handle()
 {
     if(tokens[1] == "signup")
-        return Command::SIGNUP;
+        return POSTCommand::SIGNUP;
     else if(tokens[1] == "trips")
-        return Command::TRIPS;
+        return POSTCommand::REQUEST;
     else if(tokens[1] == "accept")
-        return Command::ACCEPT;
+        return POSTCommand::ACCEPT;
     else if(tokens[1] == "finish")
-        return Command::FINISH;
+        return POSTCommand::FINISH;
 
-    return Command::A_NONE;
+    return POSTCommand::P_NONE;
 }
 
-SignupCredentials InputControl::get_signup_credentials()
+SignupCredentials InputControl::send_signup_credentials()
 {
     SignupCredentials new_signup;
     for(int i = 3; i < tokens.size()-1; i++)
@@ -62,7 +62,7 @@ SignupCredentials InputControl::get_signup_credentials()
     return new_signup;
 }
 
-TripRequestTokens InputControl::get_trip_tokens()
+TripRequestTokens InputControl::send_trip_req_tokens()
 {
     TripRequestTokens new_trip;
     for(int i = 3; i < tokens.size()-1; i++)
@@ -77,9 +77,9 @@ TripRequestTokens InputControl::get_trip_tokens()
     return new_trip;
 }
 
-AccpetFinishTokens InputControl::get_accpet_finish_tokens()
+TripIntractTokens InputControl::send_accpet_finish_tokens()
 {
-    AccpetFinishTokens new_tokens;
+    TripIntractTokens new_tokens;
     for(int i = 3; i < tokens.size(); i++)
     {
         if(tokens[i] == "username")
