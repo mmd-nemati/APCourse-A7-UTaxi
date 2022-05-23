@@ -62,8 +62,7 @@ void Utaxi::get()
 {
     GETCommand::Command command = input.get_command_handle();
     if(command == GETCommand::TRIPS_LIST)
-        ;
-        // trips_list();
+        trips_list();
 }
 
 void Utaxi::signup()
@@ -107,7 +106,7 @@ void Utaxi::finish()
 {
     TripIntractTokens new_finish_tokens = input.send_accpet_finish_tokens();
     check_finish_errors(new_finish_tokens);
-    
+
     output.done();
     find_passenger_by_trip(new_finish_tokens.id)->stop_travel();
     members[find_member_index(new_finish_tokens.username)]->stop_travel();
@@ -116,9 +115,10 @@ void Utaxi::finish()
 
 void Utaxi::trips_list()
 {
-    
+    TripIntractTokens new_trips_list_tokens = input.send_get_trips_tokens();
+    check_is_driver(new_trips_list_tokens.username);
+    output.trips_list(trips);
 }
-
 
 void Utaxi::check_user_exist(SignupCredentials new_signup)
 {

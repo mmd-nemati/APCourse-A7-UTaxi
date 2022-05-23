@@ -94,3 +94,16 @@ TripIntractTokens InputControl::send_accpet_finish_tokens()
     }
     return new_tokens;
 }
+
+TripIntractTokens InputControl::send_get_trips_tokens()
+{
+    TripIntractTokens new_tokens;
+    for(int i = 3; i < tokens.size(); i++)
+    {
+        if(tokens[i] == "username")
+            new_tokens.username = tokens[i+1];
+        if(tokens[i] == "id")
+            new_tokens.id = stoi(tokens[i+1]);
+    }
+    return new_tokens;
+}

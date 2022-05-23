@@ -14,7 +14,7 @@ class Trip
         bool is_same_as(int _id);
         void start();
         void finish();
-
+        bool is_deleted();
         Member* get_passenger() { return passenger; }
         Location* get_origin() { return origin; }
         Location* get_destination() { return destination;}

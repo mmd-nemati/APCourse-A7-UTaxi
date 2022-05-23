@@ -23,3 +23,8 @@ void Trip::finish()
 {
     status = TRIP_FINISHED;
 }
+
+bool Trip::is_deleted()
+{
+    return (status == TRIP_DELETED);
+}

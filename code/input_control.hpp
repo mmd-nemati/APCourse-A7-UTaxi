@@ -17,6 +17,7 @@ class InputControl
         SignupCredentials send_signup_credentials();
         TripRequestTokens send_trip_req_tokens();
         TripIntractTokens send_accpet_finish_tokens();
+        TripIntractTokens send_get_trips_tokens();
     private:
         std::string line;
         std::vector<std::string> tokens;

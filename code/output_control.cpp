@@ -3,12 +3,19 @@
 
 void OutputControl::trips_list(std::vector<Trip*> trips)
 {
+    if(trips.size() == 0)
+        throw std::runtime_error("EMPTY");
+
     for(int i = 0; i < trips.size(); i++)
-        std::cout << trips[i]->get_id() << TRIPS_DATA_DELIMITER <<
+        if(!trips[i]->is_deleted())
+        {
+            std::cout << trips[i]->get_id() << TRIPS_DATA_DELIMITER <<
             trips[i]->get_passenger()->get_username() << TRIPS_DATA_DELIMITER <<
                 trips[i]->get_origin()->get_name() << TRIPS_DATA_DELIMITER <<
                     trips[i]->get_destination()->get_name() << TRIPS_DATA_DELIMITER <<
-                        std::endl;
+                        trips[i]->get_status() << TRIPS_DATA_DELIMITER <<
+                            std::endl;
+        }   
 }
 
 void OutputControl::error(std::runtime_error& error) 
