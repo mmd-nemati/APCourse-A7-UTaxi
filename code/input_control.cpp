@@ -41,6 +41,8 @@ Command::AppCommand InputControl::post_command_handle()
         return Command::SIGNUP;
     else if(tokens[1] == "trips")
         return Command::TRIPS;
+    else if(tokens[1] == "accept")
+        return Command::ACCEPT;
     
     return Command::A_NONE;
 }
@@ -71,4 +73,17 @@ TripRequestTokens InputControl::get_trip_tokens()
             new_trip.destination_name = tokens[i+1];
     }
     return new_trip;
+}
+
+AccpetTokens InputControl::get_accpet_tokens()
+{
+    AccpetTokens new_accpet;
+    for(int i = 3; i < tokens.size(); i++)
+    {
+        if(tokens[i] == "username")
+            new_accpet.username = tokens[i+1];
+        if(tokens[i] == "id")
+            new_accpet.id = stoi(tokens[i+1]);
+    }
+    return new_accpet;
 }

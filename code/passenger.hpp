@@ -12,5 +12,6 @@ class Passenger : public Member
         Passenger() {};
         Passenger(std::string _username);
         virtual bool is_passenger() { return true; }
+        virtual bool is_driver() { return false; }
 };
 #endif /* __PASSENGER_H__ */

@@ -10,7 +10,7 @@ bool Member::is_traveling()
     return (status == MEMBER_TRAVELING);
 }
 
-/*void Member::start_to_travel()
+void Member::start_to_travel()
 {
     status = MEMBER_TRAVELING;
-}*/
+} 

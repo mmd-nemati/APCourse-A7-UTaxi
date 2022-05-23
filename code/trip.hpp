@@ -11,6 +11,9 @@ class Trip
     public:
         Trip() {};
         Trip(Member* _passenger, Location* _origin, Location* _destination, int _id);
+        bool is_same_as(int _id);
+        void start();
+        Member* get_passenger() { return passenger; }
         // to implement
 
     private:

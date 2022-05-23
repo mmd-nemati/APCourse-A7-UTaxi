@@ -20,4 +20,10 @@ struct TripRequestTokens
     std::string destination_name = "NULL";
 };
 
+struct AccpetTokens
+{
+    std::string username = "NULL";
+    int id = -1;
+};
+
 #endif /* __GENERAL_H__ */

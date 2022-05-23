@@ -21,16 +21,23 @@ class Utaxi
         void post();
         void signup();
         void post_trips();
+        void accept();
         void check_user_exist(SignupCredentials new_signup);
         void check_signup_role(SignupCredentials new_signup);
-        void check_post_trips_errors(TripRequestTokens new_trip_tokens);
         void check_new_trip_arguments(TripRequestTokens new_trip_tokens);
         void check_new_trip_tokens_not_found(TripRequestTokens new_trip_tokens);
-        void check_passenger_travel_status(TripRequestTokens new_trip_tokens);
-        void check_is_passenger(TripRequestTokens new_trip_tokens);
+        void check_member_travel_status(std::string _username);
+        void check_is_passenger(std::string _username);
+        void check_is_driver(std::string _username);
+        void check_accept_tokens_not_found(AccpetTokens new_accpet_tokens);
+        void check_post_trips_errors(TripRequestTokens new_trip_tokens);
+        void check_accept_errors(AccpetTokens new_accpet_tokens);
         //void travel_begins(TripRequestTokens new_trip_tokens);
         int find_member_index(std::string member_name);
         int find_location_index(std::string location_name);
+        int find_trip_index(int _id);
+        Member* find_passenger_by_trip(int _id);
+
     private:
         InputControl input;
         std::vector<Location*> locations;
