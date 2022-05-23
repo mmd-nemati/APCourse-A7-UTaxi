@@ -7,6 +7,7 @@
 #include "data_reader.hpp"
 #include "location.hpp"
 #include "input_control.hpp"
+#include "output_control.hpp"
 #include "member.hpp"
 #include "driver.hpp"
 #include "passenger.hpp"
@@ -19,10 +20,16 @@ class Utaxi
         void gather_loc_data(std::string file_address);
         void run();
         void post();
+        void get();
+
         void signup();
         void post_trips();
         void accept();
         void finish();
+        void trips_list();
+
+
+        
         void check_user_exist(SignupCredentials new_signup);
         void check_signup_role(SignupCredentials new_signup);
         void check_new_trip_arguments(TripRequestTokens new_trip_tokens);
@@ -43,6 +50,7 @@ class Utaxi
 
     private:
         InputControl input;
+        OutputControl output;
         std::vector<Location*> locations;
         std::vector<Member*> members;
         std::vector<Trip*> trips;

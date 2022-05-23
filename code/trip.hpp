@@ -14,7 +14,12 @@ class Trip
         bool is_same_as(int _id);
         void start();
         void finish();
+
         Member* get_passenger() { return passenger; }
+        Location* get_origin() { return origin; }
+        Location* get_destination() { return destination;}
+        std::string get_status() { return status; }
+        int get_id() { return trip_id; }
         // to implement
 
     private:

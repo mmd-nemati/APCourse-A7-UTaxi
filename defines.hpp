@@ -5,6 +5,7 @@
 
 const std::string LOCATION_TOKENS_DELIMITER = ",";
 const std::string COMMAND_TOKENS_DELIMITER = " ";
+const std::string TRIPS_DATA_DELIMITER = " ";
 const std::string GET = "GET";
 const std::string POST = "POST";
 const std::string DELETE = "DELETE";

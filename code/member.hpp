@@ -15,8 +15,8 @@ class Member
         bool is_traveling();
         virtual bool is_passenger() = 0;
         virtual bool is_driver() = 0;
-        // to implement
 
+        std::string get_username() { return username; }
     protected:
         std::string username;
         bool status;

@@ -26,11 +26,13 @@ void Utaxi::run()
     while(true)
     {
         input.receive();
-        //if(input.detect_command() == Command::GET)
-        //   std::cout << "yes" << std::endl;
+
         if (input.detect_command() == WebCommand::POST)
             post();
-            //std::cout << "post" << std::endl;
+        else if(input.detect_command() == WebCommand::GET)
+            get();
+        else if (input.detect_command() == WebCommand::W_NONE)
+            break;
     }
 }
 
@@ -52,9 +54,25 @@ void Utaxi::post()
     }
     catch(std::runtime_error& er)
     {
-        std::cout << er.what() << std::endl;
+        output.error(er);
         return;
     }
+}
+
+void Utaxi::get()
+{
+    try
+    {
+        GETCommand::Command command = input.get_command_handle();
+        if(command == GETCommand::TRIPS_LIST)
+            ;
+            // trips_list();
+    }
+    catch(std::runtime_error &er)
+    {
+        output.error(er);
+    }
+    
 }
 
 void Utaxi::signup()
@@ -67,14 +85,14 @@ void Utaxi::signup()
     }
     catch(std::runtime_error& er)
     {
-        std::cerr << er.what() << std::endl;
+        output.error(er);
         return;
     }
     if(new_signup.role == "driver")
         members.push_back(new Driver(new_signup.username));
     if(new_signup.role == "passenger")
         members.push_back(new Passenger(new_signup.username));
-    std::cout << "OK" << std::endl;
+    output.done();
 }
 
 void Utaxi::post_trips()
@@ -86,7 +104,7 @@ void Utaxi::post_trips()
     }
     catch(std::runtime_error& er)
     {
-        std::cerr << er.what() << std::endl;
+        output.error(er);
         return;
     }
     trips_counter++;
@@ -106,10 +124,10 @@ void Utaxi::accept()
     }
     catch(std::runtime_error& er)
     {
-        std::cerr << er.what() << std::endl;
+        output.error(er);
         return;
     }
-    std::cout << "OK" << std::endl;
+    output.done();
     find_passenger_by_trip(new_accpet_tokens.id)->start_to_travel();
     members[find_member_index(new_accpet_tokens.username)]->start_to_travel();
     trips[find_trip_index(new_accpet_tokens.id)]->start();
@@ -124,14 +142,31 @@ void Utaxi::finish()
     }
     catch(std::runtime_error& er)
     {
-        std::cerr << er.what() << std::endl;
+       output.error(er);
         return;
     }
-    std::cout << "OK" << std::endl;
+    output.done();
     find_passenger_by_trip(new_finish_tokens.id)->stop_travel();
     members[find_member_index(new_finish_tokens.username)]->stop_travel();
     trips[find_trip_index(new_finish_tokens.id)]->finish();
 }
+
+void Utaxi::trips_list()
+{
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 void Utaxi::check_user_exist(SignupCredentials new_signup)
 {

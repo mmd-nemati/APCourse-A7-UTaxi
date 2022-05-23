@@ -23,7 +23,9 @@ WebCommand::Command InputControl::detect_command()
             return WebCommand::POST;
         else if(tokens[0] == DELETE)
             return WebCommand::DELETE;
-        
+        else if(tokens[0] == "")
+            return WebCommand::W_NONE;
+            
         else
             throw std::runtime_error("Bad Request");
     }
@@ -47,6 +49,16 @@ POSTCommand::Command InputControl::post_command_handle()
         return POSTCommand::FINISH;
 
     return POSTCommand::P_NONE;
+}
+
+GETCommand::Command InputControl::get_command_handle()
+{
+    if(tokens[1] == "trips" && tokens.size() == 5)
+        return GETCommand::TRIPS_LIST;
+    else if(tokens[1] == "trips" && tokens.size() == 7)
+        return GETCommand::TRIP_DATA;
+    
+    return GETCommand::G_NONE;
 }
 
 SignupCredentials InputControl::send_signup_credentials()

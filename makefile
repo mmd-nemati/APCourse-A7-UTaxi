@@ -1,7 +1,7 @@
 CC := g++ -std=c++11
 EXECUTABLE := utaxi.out
 
-OBJECTS := general.o data_reader.o location.o member.o passenger.o driver.o trip.o input_control.o
+OBJECTS := general.o data_reader.o location.o member.o passenger.o driver.o trip.o input_control.o output_control.o
 
 DEFINES := defines.hpp
 UTAXI := code/utaxi
@@ -16,6 +16,7 @@ DRIVER := code/driver
 TRIP := code/trip
 
 INPUT_CONTROL := code/input_control
+OUTPUT_CONTROL := code/output_control
 
 all: ${EXECUTABLE}
 
@@ -52,6 +53,9 @@ trip.o: ${TRIP}.cpp ${TRIP}.hpp ${DEFINES}
 input_control.o: ${INPUT_CONTROL}.cpp ${INPUT_CONTROL}.hpp ${DEFINES}
 	${CC} -c ${INPUT_CONTROL}.cpp -o input_control.o
 
+output_control.o: ${OUTPUT_CONTROL}.cpp ${INPUT_CONTROL}.hpp ${DEFINES}
+	${CC} -c ${OUTPUT_CONTROL}.cpp -o output_control.o
+	
 .PHONY: clean
 clean:
 	rm -r *.o
