@@ -15,6 +15,7 @@ class OutputControl
         void error(std::runtime_error& error);
         void done();
         void trip_id(int _id);
+        void trip_data(Trip* trip);
 };
 
 #endif /* __OUTPUT_CONTROL_H__ */

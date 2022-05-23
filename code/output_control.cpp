@@ -32,3 +32,16 @@ void OutputControl::trip_id(int _id)
 {
     std::cout << _id << std::endl;
 }
+
+void OutputControl::trip_data(Trip* trip)
+{
+    if(trip->is_deleted())
+        throw std::runtime_error("Not Found");
+        
+    std::cout << trip->get_id() << TRIPS_DATA_DELIMITER <<
+        trip->get_passenger()->get_username() << TRIPS_DATA_DELIMITER <<
+            trip->get_origin()->get_name() << TRIPS_DATA_DELIMITER <<
+                trip->get_destination()->get_name() << TRIPS_DATA_DELIMITER <<
+                    trip->get_status() << TRIPS_DATA_DELIMITER <<
+                        std::endl;
+}

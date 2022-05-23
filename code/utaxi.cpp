@@ -63,6 +63,10 @@ void Utaxi::get()
     GETCommand::Command command = input.get_command_handle();
     if(command == GETCommand::TRIPS_LIST)
         trips_list();
+    else if(command == GETCommand::TRIP_DATA)
+        trip_data();
+    else
+        throw std::runtime_error("Not Found");
 }
 
 void Utaxi::signup()
@@ -120,6 +124,13 @@ void Utaxi::trips_list()
     output.trips_list(trips);
 }
 
+void Utaxi::trip_data()
+{
+    TripIntractTokens new_trip_data_tokens = input.send_get_trips_tokens();
+    check_is_driver(new_trip_data_tokens.username);
+    check_trip_is_available(new_trip_data_tokens.id);
+    output.trip_data(trips[find_trip_index(new_trip_data_tokens.id)]);
+}
 void Utaxi::check_user_exist(SignupCredentials new_signup)
 {
     for(int i = 0; i < members.size(); i++)
@@ -143,14 +154,18 @@ void Utaxi::check_post_trips_errors(TripRequestTokens new_trip_tokens)
 
 void Utaxi::check_accept_errors(TripIntractTokens new_accpet_tokens)
 {
-    check_accept_finish_tokens_not_found(new_accpet_tokens);
+    //check_accept_finish_tokens_not_found(new_accpet_tokens);
+    check_member_is_available(new_accpet_tokens.username);
+    check_trip_is_available(new_accpet_tokens.id);
     check_is_driver(new_accpet_tokens.username);
     check_member_traveling(new_accpet_tokens.username);
 }
 
 void Utaxi::check_finish_errors(TripIntractTokens new_finish_tokens)
 {
-    check_accept_finish_tokens_not_found(new_finish_tokens);
+    //check_accept_finish_tokens_not_found(new_finish_tokens);
+    check_member_is_available(new_finish_tokens.username);
+    check_trip_is_available(new_finish_tokens.id);
     check_is_driver(new_finish_tokens.username);
     check_member_not_traveling(new_finish_tokens.username);
 }
@@ -200,21 +215,22 @@ void Utaxi::check_is_passenger(std::string _username)
         throw std::runtime_error("Permission Denied");
 }
 
-void Utaxi::check_accept_finish_tokens_not_found(TripIntractTokens new_accpet_tokens)
-{
-    bool user_exist = false;
+//void Utaxi::check_accept_finish_tokens_not_found(TripIntractTokens new_accpet_tokens)
+//{
+    /*bool user_exist = false;
     bool trip_exist = false;
+    if(find_member_index(new_accpet_tokens.username) == -1)
     for(int i = 0; i < members.size(); i++)
         if(members[i]->is_same_as(new_accpet_tokens.username))
             user_exist = true;
 
-    for(int i = 0; i < trips.size(); i++)
-        if(trips[i]->is_same_as(new_accpet_tokens.id))
+    if(find_trip_index(new_accpet_tokens.id) != -1)
             trip_exist = true;
-    
-    if(user_exist == false || trip_exist == false)
-        throw std::runtime_error("Not Found");
-}
+    */
+    //if(find_trip_index(new_accpet_tokens.id) == -1 || 
+      //  find_member_index(new_accpet_tokens.username) == -1)
+        //    throw std::runtime_error("Not Found");
+//}*/
 
 
 void Utaxi::check_is_driver(std::string _username)
@@ -223,6 +239,17 @@ void Utaxi::check_is_driver(std::string _username)
         throw std::runtime_error("Permission Denied");
 }
 
+void Utaxi::check_member_is_available(std::string _username)
+{
+    if(find_member_index(_username) == -1)
+        throw std::runtime_error("Not Found");
+}
+
+void Utaxi::check_trip_is_available(int _id)
+{
+    if(find_trip_index(_id) == -1)
+        throw std::runtime_error("Not Found");
+}
 int Utaxi::find_member_index(std::string member_name)
 {
     for(int i = 0; i < members.size(); i++)
