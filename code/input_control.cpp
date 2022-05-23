@@ -15,24 +15,17 @@ void InputControl::receive()
 
 WebCommand::Command InputControl::detect_command()
 {
-    try
-    {
-        if(tokens[0] == GET)
-            return WebCommand::GET;
-        else if(tokens[0] == POST)
-            return WebCommand::POST;
-        else if(tokens[0] == DELETE)
-            return WebCommand::DELETE;
-        else if(tokens[0] == "")
-            return WebCommand::W_NONE;
-            
-        else
-            throw std::runtime_error("Bad Request");
-    }
-    catch(std::runtime_error& er)
-    {
-        std::cerr << er.what() << std::endl;
-    }
+    if(tokens[0] == GET)
+        return WebCommand::GET;
+    else if(tokens[0] == POST)
+        return WebCommand::POST;
+    else if(tokens[0] == DELETE)
+        return WebCommand::DELETE;
+    else if(tokens[0] == "")
+        return WebCommand::W_NONE;
+
+    else
+        throw std::runtime_error("Bad Request");
 
     return WebCommand::W_NONE;
 }
