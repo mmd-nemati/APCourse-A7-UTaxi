@@ -32,9 +32,11 @@ class Database
         void check_trip_is_available(int _id);
         void check_trip_is_deleted(int _id);
         void check_trip_is_started(int _id);
+        void check_trip_not_started(int _id);
         void check_trip_is_finished(int _id);
-        void check_delete_another_user_trip(TripIntractTokens new_delete_trip_tokens);
 
+        void check_delete_another_user_trip(TripIntractTokens new_delete_trip_tokens);
+        void check_finish_another_user_trip(TripIntractTokens new_finish_trip_tokens);
         void check_is_passenger(std::string _username);
         void check_is_driver(std::string _username);
         void check_member_traveling(std::string _username);
@@ -43,9 +45,9 @@ class Database
         int find_location_index(std::string location_name);
         int find_trip_index(int _id);
         Member* find_passenger_by_trip(int _id);
+        Member* find_driver_by_trip(int _id);
         Member* find_member_by_username(std::string _username);
         Trip* find_trip_by_id(int _id);
-
 
         std::vector<Trip*> get_all_trips() { return trips; }
     private:

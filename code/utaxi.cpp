@@ -107,7 +107,8 @@ void Utaxi::accept()
     database.find_passenger_by_trip(new_accpet_tokens.id)->start_to_travel();
     database.find_member_by_username(new_accpet_tokens.username)->start_to_travel();
     database.find_trip_by_id(new_accpet_tokens.id)->start();
-
+    database.find_trip_by_id(new_accpet_tokens.id)->set_driver(database.find_member_by_username(new_accpet_tokens.username));
+    
     output.done();
 }
 
@@ -115,7 +116,7 @@ void Utaxi::finish()
 {
     TripIntractTokens new_finish_tokens = input.send_accpet_finish_tokens();
     database.check_finish_errors(new_finish_tokens);
-   
+
     database.find_passenger_by_trip(new_finish_tokens.id)->stop_travel();
     database.find_member_by_username(new_finish_tokens.username)->stop_travel();
     database.find_trip_by_id(new_finish_tokens.id)->finish();

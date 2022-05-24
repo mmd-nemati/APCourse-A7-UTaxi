@@ -1,5 +1,5 @@
 #include "database.hpp"
-
+#include <iostream>
 Database::Database()
 {
     ;
@@ -39,6 +39,9 @@ void Database::check_accept_errors(TripIntractTokens new_accpet_tokens)
 {
     check_member_is_available(new_accpet_tokens.username);
     check_trip_is_available(new_accpet_tokens.id);
+    check_trip_is_started(new_accpet_tokens.id);
+    check_trip_is_finished(new_accpet_tokens.id);
+    check_trip_is_deleted(new_accpet_tokens.id);
     check_is_driver(new_accpet_tokens.username);
     check_member_traveling(new_accpet_tokens.username);
 }
@@ -47,8 +50,10 @@ void Database::check_finish_errors(TripIntractTokens new_finish_tokens)
 {
     check_member_is_available(new_finish_tokens.username);
     check_trip_is_available(new_finish_tokens.id);
+    check_trip_not_started(new_finish_tokens.id);
     check_is_driver(new_finish_tokens.username);
     check_member_not_traveling(new_finish_tokens.username);
+    check_finish_another_user_trip(new_finish_tokens);
 }
 
 void Database::check_delete_trip_errors(TripIntractTokens new_delete_trip_tokens)
@@ -95,6 +100,12 @@ void Database::check_trip_is_started(int _id)
         throw std::runtime_error("Bad Request");
 }
 
+void Database::check_trip_not_started(int _id)
+{
+    if(!trips[find_trip_index(_id)]->is_started())
+        throw std::runtime_error("Bad Request");
+}
+
 void Database::check_trip_is_finished(int _id)
 {
     if(trips[find_trip_index(_id)]->is_finished())
@@ -106,6 +117,13 @@ void Database::check_delete_another_user_trip(TripIntractTokens new_delete_trip_
     if(!find_passenger_by_trip(new_delete_trip_tokens.id)->is_same_as(new_delete_trip_tokens.username))
         throw std::runtime_error("Permission Denied");
 }
+
+void Database::check_finish_another_user_trip(TripIntractTokens new_finish_tokens)
+{
+    if(!find_driver_by_trip(new_finish_tokens.id)->is_same_as(new_finish_tokens.username))
+        throw std::runtime_error("Permission Denied");
+}
+
 void Database::check_is_passenger(std::string _username)
 {
     if(!members[find_member_index(_username)]->is_passenger())
@@ -160,6 +178,11 @@ int Database::find_trip_index(int _id)
 Member* Database::find_passenger_by_trip(int _id)
 {
     return (trips[find_trip_index(_id)]->get_passenger());
+}
+
+Member* Database::find_driver_by_trip(int _id)
+{
+    return (trips[find_trip_index(_id)]->get_driver());
 }
 
 Member* Database::find_member_by_username(std::string _username)

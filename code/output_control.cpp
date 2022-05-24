@@ -5,7 +5,6 @@ void OutputControl::trips_list(std::vector<Trip*> trips)
 {
     if(trips.size() == 0)
         throw std::runtime_error("EMPTY");
-
     for(int i = 0; i < trips.size(); i++)
         if(!trips[i]->is_deleted())
         {

@@ -20,7 +20,9 @@ class Trip
         bool is_started();
         bool is_finished();
 
+        void set_driver(Member* _driver) { driver = _driver; }
         Member* get_passenger() { return passenger; }
+        Member* get_driver() { return driver; }
         Location* get_origin() { return origin; }
         Location* get_destination() { return destination;}
         std::string get_status() { return status; }
@@ -28,6 +30,7 @@ class Trip
 
     private:
         Member* passenger;
+        Member* driver;
         Location* origin;
         Location* destination;
         std::string status;
