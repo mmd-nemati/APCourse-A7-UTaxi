@@ -20,6 +20,7 @@ class InputControl
         TripIntractTokens send_accpet_finish_tokens();
         TripIntractTokens send_get_trips_tokens();
         TripIntractTokens send_delete_trip_tokens();
+        
     private:
         std::string line;
         std::vector<std::string> tokens;

@@ -14,4 +14,5 @@ class Passenger : public Member
         virtual bool is_passenger() { return true; }
         virtual bool is_driver() { return false; }
 };
+
 #endif /* __PASSENGER_H__ */

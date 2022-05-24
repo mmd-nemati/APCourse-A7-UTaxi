@@ -1,5 +1,6 @@
 #include <iostream>
 #include "utaxi.hpp"
+
 Utaxi::Utaxi()
 {
     trips_counter = 0;
