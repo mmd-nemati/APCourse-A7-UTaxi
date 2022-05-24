@@ -1,10 +1,12 @@
 CC := g++ -std=c++11
 EXECUTABLE := utaxi.out
 
-OBJECTS := general.o data_reader.o location.o member.o passenger.o driver.o trip.o input_control.o output_control.o
+UTAXI_ADDTIONAL_OBJECTS :=  database.o input_control.o output_control.o
+DATABASE_OBJECTS := general.o data_reader.o location.o member.o passenger.o driver.o trip.o
 
 DEFINES := defines.hpp
 UTAXI := code/utaxi
+DATABASE := code/database
 GENERAL := code/general
 DATA_READER := code/data_reader
 LOCATION := code/location
@@ -26,8 +28,11 @@ ${EXECUTABLE}: main.o
 main.o: main.cpp utaxi.o
 	${CC} -c main.cpp -o main.o
 
-utaxi.o: ${UTAXI}.cpp ${UTAXI}.hpp ${DEFINES} ${OBJECTS}
+utaxi.o: ${UTAXI}.cpp ${UTAXI}.hpp ${UTAXI_ADDTIONAL_OBJECTS} ${DEFINES}
 	${CC} -c ${UTAXI}.cpp -o utaxi.o
+
+database.o: ${DATABASE}.cpp ${DATABASE}.hpp ${DATABASE_OBJECTS} ${DEFINES}
+	${CC} -c ${DATABASE}.cpp -o database.o
 
 general.o: ${LOCATION}.hpp ${GENERAL}.cpp ${GENERAL}.hpp ${DEFINES}
 	${CC} -c ${GENERAL}.cpp -o general.o
@@ -55,7 +60,7 @@ input_control.o: ${INPUT_CONTROL}.cpp ${INPUT_CONTROL}.hpp ${DEFINES}
 
 output_control.o: ${OUTPUT_CONTROL}.cpp ${INPUT_CONTROL}.hpp ${DEFINES}
 	${CC} -c ${OUTPUT_CONTROL}.cpp -o output_control.o
-	
+
 .PHONY: clean
 clean:
 	rm -r *.o
