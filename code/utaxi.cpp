@@ -14,7 +14,7 @@ void Utaxi::gather_loc_data(std::string file_address)
     for(int i = 0; i < loc_reader.get_locs_num(); i++)
     {
         tokens = loc_reader.provide_loc_raw_data(i);
-        Location* new_loc = new Location(tokens[0], stod(tokens[1]), stod(tokens[2]));
+        Location* new_loc = new Location(tokens[0], stod(tokens[1]), stod(tokens[2]), stoi(tokens[3]));
         database.add_location(new_loc);
     }
 }
