@@ -40,7 +40,7 @@ general.o: ${LOCATION}.hpp ${GENERAL}.cpp ${GENERAL}.hpp ${DEFINES}
 data_reader.o: ${DATA_READER}.cpp ${DATA_READER}.hpp ${DEFINES}
 	${CC} -c ${DATA_READER}.cpp -o data_reader.o
 
-location.o: ${LOCATION}.cpp ${LOCATION}.hpp ${DEFINES}
+location.o: ${GENERAL}.hpp ${LOCATION}.cpp ${LOCATION}.hpp ${DEFINES}
 	${CC} -c ${LOCATION}.cpp -o location.o
 
 member.o: ${MEMBER}.cpp ${MEMBER}.hpp ${DEFINES}

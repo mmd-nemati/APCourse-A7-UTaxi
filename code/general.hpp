@@ -3,10 +3,13 @@
 
 #include <vector>
 #include <string>
+#include <cmath>
 
 #include "../defines.hpp"
 
 std::vector<std::string> parse_line(std::string line, std::string delimiter);
+double calc_linear_dist(double lat1, double long1, double lat2, double long2);
+
 struct SignupCredentials 
 {
     std::string username = "NULL";
