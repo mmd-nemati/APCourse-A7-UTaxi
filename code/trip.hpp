@@ -13,7 +13,7 @@ class Trip
         Trip(Member* _passenger, Location* _origin, Location* _destination, int _id);
         
         bool is_same_as(int _id);
-        void calc_price();
+        double calc_price();
         void start();
         void finish();
         void delete_yourself();

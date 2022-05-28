@@ -14,7 +14,7 @@ std::vector<std::string> parse_line(std::string line, std::string delimiter)
     return tokens;
 }
 
-double calc_linear_dist(double lat1, double lat2, double long1, double long2)
+double calc_linear_dist(double lat1, double long1, double lat2, double long2)
 {
     return (sqrt(pow(lat2 - lat1, 2) + pow(long2 - long1, 2)));
 }

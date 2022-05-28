@@ -63,6 +63,9 @@ void Utaxi::get()
         trips_list();
     else if(command == GETCommand::TRIP_DATA)
         trip_data();
+    else if(command == GETCommand::COST)
+        get_cost();
+    
     else
         throw std::runtime_error("Not Found");
 }
@@ -91,7 +94,7 @@ void Utaxi::post_trips()
 {
     TripRequestTokens new_trip_tokens = input.send_trip_req_tokens();
     check_new_trip_arguments(new_trip_tokens);
-    database.check_post_trips_errors(new_trip_tokens);
+    database.check_passenger_trip_errors(new_trip_tokens);
 
     trips_counter++;
     database.add_trip(new_trip_tokens, trips_counter);
@@ -141,6 +144,16 @@ void Utaxi::trip_data()
     output.trip_data(database.find_trip_by_id(new_trip_data_tokens.id));
 }
 
+void Utaxi::get_cost()
+{
+    TripRequestTokens new_cost_tokens = input.send_trip_req_tokens();
+    database.check_passenger_trip_errors(new_cost_tokens);
+
+    double cost = database.calc_trip_cost(new_cost_tokens);
+
+    output.cost(cost);
+}
+
 void Utaxi::delete_trip()
 {
     TripIntractTokens new_delete_trip_tokens = input.send_delete_trip_tokens();
@@ -160,6 +173,6 @@ void Utaxi::check_signup_role(SignupCredentials new_signup)
 void Utaxi::check_new_trip_arguments(TripRequestTokens new_trip_tokens)
 {
     if(new_trip_tokens.username == "NULL" || new_trip_tokens.origin_name == "NULL" ||
-        new_trip_tokens.destination_name == "NULL")
+        new_trip_tokens.destination_name == "NULL" || new_trip_tokens.in_hurry == "NULL")
             throw std::runtime_error("Bad Request");
 }

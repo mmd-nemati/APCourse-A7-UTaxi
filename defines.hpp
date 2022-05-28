@@ -49,7 +49,8 @@ namespace GETCommand
     {
         G_NONE,
         TRIPS_LIST,
-        TRIP_DATA
+        TRIP_DATA,
+        COST
     };
 }
 

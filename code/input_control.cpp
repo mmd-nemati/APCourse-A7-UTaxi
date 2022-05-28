@@ -54,6 +54,8 @@ GETCommand::Command InputControl::get_command_handle()
         return GETCommand::TRIPS_LIST;
     else if(tokens[1] == "trips" && tokens.size() == 7)
         return GETCommand::TRIP_DATA;
+    else if(tokens[1] == "cost")
+        return GETCommand::COST;
     
     return GETCommand::G_NONE;
 }
@@ -90,6 +92,8 @@ TripRequestTokens InputControl::send_trip_req_tokens()
             new_trip.origin_name = tokens[i+1];
         if(tokens[i] == "destination")
             new_trip.destination_name = tokens[i+1];
+        if(tokens[i] == "in_hurry")
+            new_trip.in_hurry = tokens[i+1];
     }
     return new_trip;
 }

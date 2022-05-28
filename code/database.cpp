@@ -28,7 +28,17 @@ void Database::add_trip(TripRequestTokens new_tr, int _id)
     trips.push_back(new_trip);
 }
 
-void Database::check_post_trips_errors(TripRequestTokens new_trip_tokens)
+double Database::calc_trip_cost(TripRequestTokens new_trip_tokens)
+{
+    Trip* new_trip = new Trip(members[find_member_index(new_trip_tokens.username)],
+                        locations[find_location_index(new_trip_tokens.origin_name)],
+                        locations[find_location_index(new_trip_tokens.destination_name)],
+                            0);
+
+    return (new_trip->calc_price());
+}
+
+void Database::check_passenger_trip_errors(TripRequestTokens new_trip_tokens)
 {
     check_member_is_available(new_trip_tokens.username);
     check_location_is_available(new_trip_tokens.origin_name);

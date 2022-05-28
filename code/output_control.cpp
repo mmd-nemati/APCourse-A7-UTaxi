@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdio>
+
 #include "output_control.hpp"
 
 void OutputControl::trips_list(std::vector<Trip*> trips)
@@ -43,4 +45,9 @@ void OutputControl::trip_data(Trip* trip)
                 trip->get_destination()->get_name() << TRIPS_DATA_DELIMITER <<
                     trip->get_status() <<
                         std::endl;
+}
+
+void OutputControl::cost(double _cost)
+{
+    printf("%.2f\n", _cost);
 }

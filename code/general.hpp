@@ -21,6 +21,7 @@ struct TripRequestTokens
     std::string username = "NULL";
     std::string origin_name = "NULL";
     std::string destination_name = "NULL";
+    std::string in_hurry = "NULL";
 };
 
 struct TripIntractTokens

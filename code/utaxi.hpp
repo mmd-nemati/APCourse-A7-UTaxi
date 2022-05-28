@@ -31,6 +31,8 @@ class Utaxi
         void trips_list();
         void trip_data();
         void delete_trip();
+
+        void get_cost();
         
     private:
         InputControl input;

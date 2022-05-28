@@ -9,12 +9,13 @@ Trip::Trip(Member* _passenger, Location* _origin, Location* _destination, int _i
     trip_id = _id;
 }
 
-void Trip::calc_price()
+double Trip::calc_price()
 {
     double dist = origin->distance_to(destination);
     int traffic_factor = origin->traffic_to(destination);
 
     price = dist * traffic_factor * PRICE_COEFFICIENT;
+    return price;
 }
 
 bool Trip::is_same_as(int _id)
