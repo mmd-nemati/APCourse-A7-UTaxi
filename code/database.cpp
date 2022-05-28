@@ -24,18 +24,19 @@ void Database::add_trip(TripRequestTokens new_tr, int _id)
                             locations[find_location_index(new_tr.origin_name)],
                             locations[find_location_index(new_tr.destination_name)],
                              _id);
-    new_trip->calc_price();
+    bool hurry = (new_tr.in_hurry == "yes" ? true : false);
+    new_trip->calc_price(hurry);
     trips.push_back(new_trip);
 }
 
-double Database::calc_trip_cost(TripRequestTokens new_trip_tokens)
+double Database::calc_trip_cost(TripRequestTokens new_tr)
 {
-    Trip* new_trip = new Trip(members[find_member_index(new_trip_tokens.username)],
-                        locations[find_location_index(new_trip_tokens.origin_name)],
-                        locations[find_location_index(new_trip_tokens.destination_name)],
+    Trip* new_trip = new Trip(members[find_member_index(new_tr.username)],
+                        locations[find_location_index(new_tr.origin_name)],
+                        locations[find_location_index(new_tr.destination_name)],
                             0);
-
-    return (new_trip->calc_price());
+    bool hurry = (new_tr.in_hurry == "yes" ? true : false);
+    return (new_trip->calc_price(hurry));
 }
 
 void Database::check_passenger_trip_errors(TripRequestTokens new_trip_tokens)
