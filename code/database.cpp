@@ -34,27 +34,27 @@ void Database::check_post_trips_errors(TripRequestTokens new_trip_tokens)
     check_location_is_available(new_trip_tokens.origin_name);
     check_location_is_available(new_trip_tokens.destination_name);
     check_is_passenger(new_trip_tokens.username);
-    check_member_traveling(new_trip_tokens.username);
+    check_member_is(MEMBER_TRAVELING, new_trip_tokens.username);
 }
 
 void Database::check_accept_errors(TripIntractTokens new_accpet_tokens)
 {
     check_member_is_available(new_accpet_tokens.username);
     check_trip_is_available(new_accpet_tokens.id);
-    check_trip_is_started(new_accpet_tokens.id);
-    check_trip_is_finished(new_accpet_tokens.id);
+    check_trip_is(TRIP_TRAVELING, new_accpet_tokens.id);
+    check_trip_is(TRIP_FINISHED, new_accpet_tokens.id);
     check_trip_is_deleted(new_accpet_tokens.id);
     check_is_driver(new_accpet_tokens.username);
-    check_member_traveling(new_accpet_tokens.username);
+    check_member_is(MEMBER_TRAVELING, new_accpet_tokens.username);
 }
 
 void Database::check_finish_errors(TripIntractTokens new_finish_tokens)
 {
     check_member_is_available(new_finish_tokens.username);
     check_trip_is_available(new_finish_tokens.id);
-    check_trip_not_started(new_finish_tokens.id);
+    check_trip_is(TRIP_WAITING, new_finish_tokens.id);
     check_is_driver(new_finish_tokens.username);
-    check_member_not_traveling(new_finish_tokens.username);
+    check_member_is(MEMBER_NOT_TRAVELING, new_finish_tokens.username);
     check_finish_another_user_trip(new_finish_tokens);
 }
 
@@ -62,8 +62,8 @@ void Database::check_delete_trip_errors(TripIntractTokens new_delete_trip_tokens
 {
     check_trip_is_available(new_delete_trip_tokens.id);
     check_trip_is_deleted(new_delete_trip_tokens.id);
-    check_trip_is_started(new_delete_trip_tokens.id);
-    check_trip_is_finished(new_delete_trip_tokens.id);
+    check_trip_is(TRIP_TRAVELING, new_delete_trip_tokens.id);
+    check_trip_is(TRIP_FINISHED, new_delete_trip_tokens.id);
     check_delete_another_user_trip(new_delete_trip_tokens);
 }
 
@@ -96,21 +96,9 @@ void Database::check_trip_is_deleted(int _id)
         throw std::runtime_error("Not Found");
 }
 
-void Database::check_trip_is_started(int _id)
+void Database::check_trip_is(std::string status, int _id)
 {
-    if(trips[find_trip_index(_id)]->is_started())
-        throw std::runtime_error("Bad Request");
-}
-
-void Database::check_trip_not_started(int _id)
-{
-    if(!trips[find_trip_index(_id)]->is_started())
-        throw std::runtime_error("Bad Request");
-}
-
-void Database::check_trip_is_finished(int _id)
-{
-    if(trips[find_trip_index(_id)]->is_finished())
+    if(trips[find_trip_index(_id)]->is_status(status))
         throw std::runtime_error("Bad Request");
 }
 
@@ -138,15 +126,9 @@ void Database::check_is_driver(std::string _username)
         throw std::runtime_error("Permission Denied");
 }
 
-void Database::check_member_traveling(std::string _username)
+void Database::check_member_is(bool status, std::string _username)
 {
-    if(members[find_member_index(_username)]->is_traveling())
-        throw std::runtime_error("Bad Request");
-}
-
-void Database::check_member_not_traveling(std::string _username)
-{
-    if(!members[find_member_index(_username)]->is_traveling())
+    if(members[find_member_index(_username)]->is_status(status))
         throw std::runtime_error("Bad Request");
 }
 

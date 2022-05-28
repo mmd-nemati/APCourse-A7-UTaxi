@@ -18,9 +18,7 @@ class Trip
         void finish();
         void delete_yourself();
         bool is_deleted();
-        bool is_started();
-        bool is_finished();
-
+        bool is_status(std::string in_stat);
 
         void set_driver(Member* _driver) { driver = _driver; }
         Member* get_passenger() { return passenger; }

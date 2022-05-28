@@ -6,7 +6,7 @@ void OutputControl::trips_list(std::vector<Trip*> trips)
     if(trips.size() == 0)
         throw std::runtime_error("EMPTY");
     for(int i = 0; i < trips.size(); i++)
-        if(!trips[i]->is_deleted())
+        if(!trips[i]->is_status(TRIP_DELETED))
         {
             std::cout << trips[i]->get_id() << TRIPS_DATA_DELIMITER <<
             trips[i]->get_passenger()->get_username() << TRIPS_DATA_DELIMITER <<
@@ -34,7 +34,7 @@ void OutputControl::trip_id(int _id)
 
 void OutputControl::trip_data(Trip* trip)
 {
-    if(trip->is_deleted())
+    if(trip->is_status(TRIP_DELETED))
         throw std::runtime_error("Not Found");
 
     std::cout << trip->get_id() << TRIPS_DATA_DELIMITER <<

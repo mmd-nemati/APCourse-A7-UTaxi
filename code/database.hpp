@@ -31,16 +31,13 @@ class Database
         void check_location_is_available(std::string loc_name);
         void check_trip_is_available(int _id);
         void check_trip_is_deleted(int _id);
-        void check_trip_is_started(int _id);
-        void check_trip_not_started(int _id);
-        void check_trip_is_finished(int _id);
-
+        void check_trip_is(std::string status, int _id);
+        
         void check_delete_another_user_trip(TripIntractTokens new_delete_trip_tokens);
         void check_finish_another_user_trip(TripIntractTokens new_finish_trip_tokens);
         void check_is_passenger(std::string _username);
         void check_is_driver(std::string _username);
-        void check_member_traveling(std::string _username);
-        void check_member_not_traveling(std::string _username);
+        void check_member_is(bool status, std::string _username);
         int find_member_index(std::string member_name);
         int find_location_index(std::string location_name);
         int find_trip_index(int _id);

@@ -37,17 +37,12 @@ void Trip::delete_yourself()
     status = TRIP_DELETED;
 }
 
+bool Trip::is_status(std::string in_stat)
+{
+    return (status == in_stat);
+}
+
 bool Trip::is_deleted()
 {
     return (status == TRIP_DELETED);
-}
-
-bool Trip::is_started()
-{
-    return (status == TRIP_TRAVELING);
-}
-
-bool Trip::is_finished()
-{
-    return (status == TRIP_FINISHED);
 }

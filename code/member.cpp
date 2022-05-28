@@ -5,9 +5,9 @@ bool Member::is_same_as(std::string new_username)
     return (this->username == new_username);
 }
 
-bool Member::is_traveling()
+bool Member::is_status(bool in_stat)
 {
-    return (status == MEMBER_TRAVELING);
+    return (status == in_stat);
 }
 
 void Member::start_to_travel()
@@ -19,3 +19,4 @@ void Member::stop_travel()
 {
     status = MEMBER_NOT_TRAVELING;
 }
+
