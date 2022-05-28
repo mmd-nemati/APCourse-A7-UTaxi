@@ -18,12 +18,14 @@ void Database::add_location(Location* new_loc)
     locations.push_back(new_loc);
 }
 
-void Database::add_trip(TripRequestTokens new_trip, int _id)
+void Database::add_trip(TripRequestTokens new_tr, int _id)
 {
-    trips.push_back(new Trip(members[find_member_index(new_trip.username)],
-                            locations[find_location_index(new_trip.origin_name)],
-                            locations[find_location_index(new_trip.destination_name)],
-                             _id));
+    Trip* new_trip = new Trip(members[find_member_index(new_tr.username)],
+                            locations[find_location_index(new_tr.origin_name)],
+                            locations[find_location_index(new_tr.destination_name)],
+                             _id);
+    new_trip->calc_price();
+    trips.push_back(new_trip);
 }
 
 void Database::check_post_trips_errors(TripRequestTokens new_trip_tokens)

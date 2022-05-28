@@ -4,6 +4,7 @@
 #include <string>
 
 constexpr double LENGTH_OF_A_DEGREE = 110.5;
+constexpr double PRICE_COEFFICIENT = 10000;
 
 const std::string LOCATION_TOKENS_DELIMITER = ",";
 const std::string COMMAND_TOKENS_DELIMITER = " ";

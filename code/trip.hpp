@@ -13,12 +13,14 @@ class Trip
         Trip(Member* _passenger, Location* _origin, Location* _destination, int _id);
         
         bool is_same_as(int _id);
+        void calc_price();
         void start();
         void finish();
         void delete_yourself();
         bool is_deleted();
         bool is_started();
         bool is_finished();
+
 
         void set_driver(Member* _driver) { driver = _driver; }
         Member* get_passenger() { return passenger; }
@@ -35,6 +37,7 @@ class Trip
         Location* destination;
         std::string status;
         int trip_id;
+        double price = 0;
 };
 
 #endif /* __TRIP_H__ */
