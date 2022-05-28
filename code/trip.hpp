@@ -27,7 +27,8 @@ class Trip
         Location* get_destination() { return destination;}
         std::string get_status() { return status; }
         int get_id() { return trip_id; }
-
+        double get_price() { return price; }
+        
     private:
         Member* passenger;
         Member* driver;

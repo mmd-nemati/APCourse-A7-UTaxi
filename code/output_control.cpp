@@ -14,8 +14,9 @@ void OutputControl::trips_list(std::vector<Trip*> trips)
             trips[i]->get_passenger()->get_username() << TRIPS_DATA_DELIMITER <<
                 trips[i]->get_origin()->get_name() << TRIPS_DATA_DELIMITER <<
                     trips[i]->get_destination()->get_name() << TRIPS_DATA_DELIMITER <<
-                        trips[i]->get_status() <<
-                            std::endl;
+                        trips[i]->get_price() << TRIPS_DATA_DELIMITER <<
+                            trips[i]->get_status() <<
+                                std::endl;
         }   
 }
 
@@ -43,8 +44,9 @@ void OutputControl::trip_data(Trip* trip)
         trip->get_passenger()->get_username() << TRIPS_DATA_DELIMITER <<
             trip->get_origin()->get_name() << TRIPS_DATA_DELIMITER <<
                 trip->get_destination()->get_name() << TRIPS_DATA_DELIMITER <<
-                    trip->get_status() <<
-                        std::endl;
+                    trip->get_price() << TRIPS_DATA_DELIMITER <<
+                        trip->get_status() <<
+                            std::endl;
 }
 
 void OutputControl::cost(double _cost)

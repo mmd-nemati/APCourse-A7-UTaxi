@@ -65,8 +65,8 @@ void Database::check_finish_errors(TripIntractTokens new_finish_tokens)
     check_trip_is_available(new_finish_tokens.id);
     check_trip_is(TRIP_WAITING, new_finish_tokens.id);
     check_is_driver(new_finish_tokens.username);
-    check_member_is(MEMBER_NOT_TRAVELING, new_finish_tokens.username);
     check_finish_another_user_trip(new_finish_tokens);
+    check_member_is(MEMBER_NOT_TRAVELING, new_finish_tokens.username);
 }
 
 void Database::check_delete_trip_errors(TripIntractTokens new_delete_trip_tokens)
