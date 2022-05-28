@@ -50,10 +50,10 @@ POSTCommand::Command InputControl::post_command_handle()
 
 GETCommand::Command InputControl::get_command_handle()
 {
-    if(tokens[1] == "trips" && tokens.size() == 5)
-        return GETCommand::TRIPS_LIST;
-    else if(tokens[1] == "trips" && tokens.size() == 7)
+    if(tokens[1] == "trips" && has_id(tokens))
         return GETCommand::TRIP_DATA;
+    else if(tokens[1] == "trips" && has_cost_sort(tokens))
+        return GETCommand::TRIPS_LIST;
     else if(tokens[1] == "cost")
         return GETCommand::COST;
     
@@ -120,6 +120,8 @@ TripIntractTokens InputControl::send_get_trips_tokens()
             new_tokens.username = tokens[i+1];
         if(tokens[i] == "id")
             new_tokens.id = stoi(tokens[i+1]);
+        if(tokens[i] == "sort_by_cost")
+            new_tokens.cost_sorted = tokens[i+1];
     }
     return new_tokens;
 }

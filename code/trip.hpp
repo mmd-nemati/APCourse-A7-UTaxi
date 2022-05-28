@@ -19,6 +19,7 @@ class Trip
         void delete_yourself();
         bool is_deleted();
         bool is_status(std::string in_stat);
+        friend bool cmp_trips(Trip* t1, Trip* t2);
 
         void set_driver(Member* _driver) { driver = _driver; }
         Member* get_passenger() { return passenger; }

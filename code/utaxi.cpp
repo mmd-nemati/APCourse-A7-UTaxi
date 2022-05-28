@@ -131,8 +131,7 @@ void Utaxi::trips_list()
 {
     TripIntractTokens new_trips_list_tokens = input.send_get_trips_tokens();
     database.check_is_driver(new_trips_list_tokens.username);
-
-    output.trips_list(database.get_all_trips());
+    output.trips_list(database.get_trips(new_trips_list_tokens.cost_sorted));
 }
 
 void Utaxi::trip_data()

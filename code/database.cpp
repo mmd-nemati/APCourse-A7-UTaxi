@@ -17,6 +17,10 @@ void Database::add_location(Location* new_loc)
 {
     locations.push_back(new_loc);
 }
+bool cmp_trips(Trip* t1, Trip* t2)
+{
+    return(t2->price < t1->price);
+}
 
 void Database::add_trip(TripRequestTokens new_tr, int _id)
 {
@@ -37,6 +41,20 @@ double Database::calc_trip_cost(TripRequestTokens new_tr)
                             0);
     bool hurry = (new_tr.in_hurry == "yes" ? true : false);
     return (new_trip->calc_price(hurry));
+}
+std::vector<Trip*> Database::get_trips(std::string sorted)
+{
+    if(sorted == "yes")
+        return (get_cost_sorted_trips());
+    else
+        return trips;
+}
+
+std::vector<Trip*> Database::get_cost_sorted_trips()
+{
+    std::vector<Trip*> sorted_trips = trips;
+    sort(sorted_trips.begin(), sorted_trips.end(), cmp_trips);
+    return sorted_trips;
 }
 
 void Database::check_passenger_trip_errors(TripRequestTokens new_trip_tokens)

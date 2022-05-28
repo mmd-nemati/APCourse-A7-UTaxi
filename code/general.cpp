@@ -18,3 +18,21 @@ double calc_linear_dist(double lat1, double long1, double lat2, double long2)
 {
     return (sqrt(pow(lat2 - lat1, 2) + pow(long2 - long1, 2)));
 }
+
+bool has_id(std::vector<std::string> tokens)
+{
+    for(int i = 0; i < tokens.size(); i++)
+        if(tokens[i] == "id")
+            return true;
+    
+    return false;
+}
+
+bool has_cost_sort(std::vector<std::string> tokens)
+{
+    for(int i = 0; i < tokens.size(); i++)
+        if(tokens[i] == "sort_by_cost")
+            return true;
+            
+    return false;
+}
