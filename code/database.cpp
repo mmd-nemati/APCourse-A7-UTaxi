@@ -7,9 +7,9 @@ Database::Database()
 
 void Database::add_member(SignupCredentials new_mem)
 {
-    if(new_mem.role == "driver")
+    if(new_mem.role == DRIVER_ROLE)
         members.push_back(new Driver(new_mem.username));
-    if(new_mem.role == "passenger")
+    if(new_mem.role == PASSENGER_ROLE)
         members.push_back(new Passenger(new_mem.username));
 }
 
@@ -17,6 +17,7 @@ void Database::add_location(Location* new_loc)
 {
     locations.push_back(new_loc);
 }
+
 bool cmp_trips(Trip* t1, Trip* t2)
 {
     return(t2->price < t1->price);
@@ -28,7 +29,7 @@ void Database::add_trip(TripRequestTokens new_tr, int _id)
                             locations[find_location_index(new_tr.origin_name)],
                             locations[find_location_index(new_tr.destination_name)],
                              _id);
-    bool hurry = (new_tr.in_hurry == "yes" ? true : false);
+    bool hurry = (new_tr.in_hurry == YES_HURRY ? true : false);
     new_trip->calc_price(hurry);
     trips.push_back(new_trip);
 }
@@ -39,12 +40,12 @@ double Database::calc_trip_cost(TripRequestTokens new_tr)
                         locations[find_location_index(new_tr.origin_name)],
                         locations[find_location_index(new_tr.destination_name)],
                             0);
-    bool hurry = (new_tr.in_hurry == "yes" ? true : false);
+    bool hurry = (new_tr.in_hurry == YES_HURRY ? true : false);
     return (new_trip->calc_price(hurry));
 }
 std::vector<Trip*> Database::get_trips(std::string sorted)
 {
-    if(sorted == "yes")
+    if(sorted == YES_HURRY)
         return (get_cost_sorted_trips());
     else
         return trips;
@@ -99,66 +100,67 @@ void Database::check_delete_trip_errors(TripIntractTokens new_delete_trip_tokens
 void Database::check_member_is_available(std::string _username)
 {
     if(find_member_index(_username) == -1)
-        throw std::runtime_error("Not Found");
+        throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
 void Database::check_user_exist(std::string _username)
 {
     if(find_member_index(_username) != -1)
-        throw std::runtime_error("Bad Request");
+        throw std::runtime_error(BAD_REQUEST_ERROR);
 }
+
 void Database::check_location_is_available(std::string loc_name)
 {
     if(find_location_index(loc_name) == -1)
-        throw std::runtime_error("Not Found");
+        throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
 void Database::check_trip_is_available(int _id)
 {
     if(find_trip_index(_id) == -1)
-        throw std::runtime_error("Not Found");
+        throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
 void Database::check_trip_is_deleted(int _id)
 {
     if(trips[find_trip_index(_id)]->is_deleted())
-        throw std::runtime_error("Not Found");
+        throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
 void Database::check_trip_is(std::string status, int _id)
 {
     if(trips[find_trip_index(_id)]->is_status(status))
-        throw std::runtime_error("Bad Request");
+        throw std::runtime_error(BAD_REQUEST_ERROR);
 }
 
 void Database::check_delete_another_user_trip(TripIntractTokens new_delete_trip_tokens)
 {
     if(!find_passenger_by_trip(new_delete_trip_tokens.id)->is_same_as(new_delete_trip_tokens.username))
-        throw std::runtime_error("Permission Denied");
+        throw std::runtime_error(PERMISSION_ERROR);
 }
 
 void Database::check_finish_another_user_trip(TripIntractTokens new_finish_tokens)
 {
     if(!find_driver_by_trip(new_finish_tokens.id)->is_same_as(new_finish_tokens.username))
-        throw std::runtime_error("Permission Denied");
+        throw std::runtime_error(PERMISSION_ERROR);
 }
 
 void Database::check_is_passenger(std::string _username)
 {
     if(!members[find_member_index(_username)]->is_passenger())
-        throw std::runtime_error("Permission Denied");
+        throw std::runtime_error(PERMISSION_ERROR);
 }
 
 void Database::check_is_driver(std::string _username)
 {
     if(!members[find_member_index(_username)]->is_driver())
-        throw std::runtime_error("Permission Denied");
+        throw std::runtime_error(PERMISSION_ERROR);
 }
 
 void Database::check_member_is(bool status, std::string _username)
 {
     if(members[find_member_index(_username)]->is_status(status))
-        throw std::runtime_error("Bad Request");
+        throw std::runtime_error(BAD_REQUEST_ERROR);
 }
 
 int Database::find_member_index(std::string member_name)

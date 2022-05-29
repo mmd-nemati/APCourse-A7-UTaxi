@@ -53,7 +53,7 @@ void Utaxi::post()
     else if(command == POSTCommand::FINISH)
         finish();
     else
-        throw std::runtime_error("Not Found");
+        throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
 void Utaxi::get()
@@ -67,7 +67,7 @@ void Utaxi::get()
         get_cost();
     
     else
-        throw std::runtime_error("Not Found");
+        throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
 void Utaxi::web_delete()
@@ -76,7 +76,7 @@ void Utaxi::web_delete()
     if(command == DELETECommand::TRIPS)
         delete_trip();
     else
-        throw std::runtime_error("Not Found");
+        throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
 void Utaxi::signup()
@@ -165,13 +165,13 @@ void Utaxi::delete_trip()
 
 void Utaxi::check_signup_role(SignupCredentials new_signup)
 {
-    if(new_signup.role != "driver" && new_signup.role != "passenger")
-        throw std::runtime_error("Bad Request");
+    if(new_signup.role != DRIVER_ROLE && new_signup.role != PASSENGER_ROLE)
+        throw std::runtime_error(BAD_REQUEST_ERROR);
 }
 
 void Utaxi::check_new_trip_arguments(TripRequestTokens new_trip_tokens)
 {
-    if(new_trip_tokens.username == "NULL" || new_trip_tokens.origin_name == "NULL" ||
-        new_trip_tokens.destination_name == "NULL" || new_trip_tokens.in_hurry == "NULL")
-            throw std::runtime_error("Bad Request");
+    if(new_trip_tokens.username == EMPTY_ARG || new_trip_tokens.origin_name == EMPTY_ARG ||
+        new_trip_tokens.destination_name == EMPTY_ARG || new_trip_tokens.in_hurry == EMPTY_ARG)
+            throw std::runtime_error(BAD_REQUEST_ERROR);
 }

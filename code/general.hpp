@@ -13,23 +13,23 @@ bool has_id(std::vector<std::string> tokens);
 bool has_cost_sort(std::vector<std::string> tokens);
 struct SignupCredentials 
 {
-    std::string username = "NULL";
-    std::string role = "NULL";
+    std::string username = EMPTY_ARG;
+    std::string role = EMPTY_ARG;
 };
 
 struct TripRequestTokens
 {
-    std::string username = "NULL";
-    std::string origin_name = "NULL";
-    std::string destination_name = "NULL";
-    std::string in_hurry = "NULL";
+    std::string username = EMPTY_ARG;
+    std::string origin_name = EMPTY_ARG;
+    std::string destination_name = EMPTY_ARG;
+    std::string in_hurry = EMPTY_ARG;
 };
 
 struct TripIntractTokens
 {
-    std::string username = "NULL";
+    std::string username = EMPTY_ARG;
     int id = -1;
-    std::string cost_sorted = "NULL";
+    std::string cost_sorted = EMPTY_ARG;
 };
 
 #endif /* __GENERAL_H__ */
