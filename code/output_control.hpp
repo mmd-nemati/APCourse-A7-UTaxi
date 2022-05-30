@@ -17,6 +17,7 @@ class OutputControl
         void trip_id(int _id);
         void trip_data(Trip* trip);
         void cost(double _cost);
+        void print_trip_data(Trip* trip);
 };
 
 #endif /* __OUTPUT_CONTROL_H__ */

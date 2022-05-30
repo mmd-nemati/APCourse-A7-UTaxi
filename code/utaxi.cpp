@@ -97,8 +97,8 @@ void Utaxi::post_trips()
     database.check_passenger_trip_errors(new_trip_tokens);
 
     trips_counter++;
-    database.add_trip(new_trip_tokens, trips_counter);
-
+    new_trip_tokens.id = trips_counter;
+    database.add_trip(new_trip_tokens);
     output.trip_id(trips_counter);
 }
 

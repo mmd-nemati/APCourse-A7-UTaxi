@@ -11,7 +11,7 @@ class Trip
     public:
         Trip() {};
         Trip(Member* _passenger, Location* _origin, Location* _destination, int _id);
-        
+
         bool is_same_as(int _id);
         double calc_price(bool hurry);
         void start();

@@ -1,9 +1,5 @@
 #include "database.hpp"
 #include <iostream>
-Database::Database()
-{
-    ;
-}
 
 void Database::add_member(SignupCredentials new_mem)
 {
@@ -23,12 +19,9 @@ bool cmp_trips(Trip* t1, Trip* t2)
     return(t2->price < t1->price);
 }
 
-void Database::add_trip(TripRequestTokens new_tr, int _id)
+void Database::add_trip(TripRequestTokens new_tr)
 {
-    Trip* new_trip = new Trip(members[find_member_index(new_tr.username)],
-                            locations[find_location_index(new_tr.origin_name)],
-                            locations[find_location_index(new_tr.destination_name)],
-                             _id);
+    Trip* new_trip = make_trip(new_tr);
     bool hurry = (new_tr.in_hurry == YES_HURRY ? true : false);
     new_trip->calc_price(hurry);
     trips.push_back(new_trip);
@@ -36,13 +29,21 @@ void Database::add_trip(TripRequestTokens new_tr, int _id)
 
 double Database::calc_trip_cost(TripRequestTokens new_tr)
 {
-    Trip* new_trip = new Trip(members[find_member_index(new_tr.username)],
-                        locations[find_location_index(new_tr.origin_name)],
-                        locations[find_location_index(new_tr.destination_name)],
-                            0);
+    Trip* new_trip = make_trip(new_tr);
     bool hurry = (new_tr.in_hurry == YES_HURRY ? true : false);
     return (new_trip->calc_price(hurry));
 }
+
+Trip* Database::make_trip(TripRequestTokens new_tr)
+{
+    Trip* new_trip = new Trip(members[find_member_index(new_tr.username)],
+                    locations[find_location_index(new_tr.origin_name)],
+                    locations[find_location_index(new_tr.destination_name)],
+                        new_tr.id);
+
+    return new_trip;
+}
+
 std::vector<Trip*> Database::get_trips(std::string sorted)
 {
     if(sorted == YES_HURRY)

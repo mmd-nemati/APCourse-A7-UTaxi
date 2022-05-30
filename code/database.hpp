@@ -18,16 +18,15 @@
 class Database
 {
     public:
-        Database();
+        Database() {};
         void add_member(SignupCredentials new_mem);
         void add_location(Location* new_loc);
-        void add_trip(TripRequestTokens new_trip, int _id);
+        void add_trip(TripRequestTokens new_trip);
         
         double calc_trip_cost(TripRequestTokens new_trip_tokens);
         std::vector<Trip*> get_trips(std::string sorted);
 
         void check_passenger_trip_errors(TripRequestTokens new_trip_tokens);
-        void check_get_cost_errors(TripRequestTokens new_cost_tokens);
         void check_accept_errors(TripIntractTokens new_accpet_tokens);
         void check_finish_errors(TripIntractTokens new_finish_tokens);
         void check_delete_trip_errors(TripIntractTokens new_delete_trip_tokens);
@@ -53,11 +52,12 @@ class Database
 
         std::vector<Trip*> get_id_sorted_trips() { return trips; }
         std::vector<Trip*> get_cost_sorted_trips();
+
     private:
         std::vector<Location*> locations;
         std::vector<Member*> members;
         std::vector<Trip*> trips;
+        Trip* make_trip(TripRequestTokens trip_tokens);
 };
-
 
 #endif /* __DATABASE_H__ */
