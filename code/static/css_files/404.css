@@ -1,0 +1,27 @@
+body {
+    background-color: rgb(180, 168, 248);
+    border-width: 2px;
+    border-style: solid;
+    margin-top: 200px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 500px;
+    padding-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    color: black;
+}
+
+input {
+    display: flex;
+    margin: 0 auto;     
+    justify-content: center;
+    height: 2em;
+    width: 4em;
+}
