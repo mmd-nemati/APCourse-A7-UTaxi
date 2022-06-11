@@ -3,14 +3,24 @@
 
     <head>
 
-        <title>Signup</title>
+        <title>Utaxi | Signup</title>
         <link rel="icon" href="../images/favicon.ico">
+        <link rel="stylesheet" href="../css_files/default.css">
         <link rel="stylesheet" href="../css_files/signup.css">
 
     </head>
 
     <body>
-        <div id="div1"><p class="head"><h1>New user?</h1><h2>Welcome!</h2></p></div>
+        <div id="head"><h1>UTAXI</h1> </div>
+        <div id="menubar">
+            <ul id="menulist">
+                <li class="menuitem" onclick="location.href='http://localhost:5000';">Home</li>
+                <li class="menuitem" onclick="location.href='http://localhost:5000/signup';">Signup</li>
+                <li class="menuitem" onclick="location.href='http://localhost:5000/reqtrip';">Requset Trip</li>
+                <li class="menuitem" onclick="location.href='http://localhost:5000/about';">About Us</li>
+            </ul>
+        </div>
+        
         <div id="div2">
             <form action="/signup" method="post">
                 <h4><p class="box-head">Signup</p></h4><br>
@@ -19,17 +29,9 @@
                 <label for="pass">Passenger</label>
                 <input name="role" id="driver" type="radio" value="Driver" />
                 <label for="driver">Driver</label><br><br><br>
-                <input  id="submit" type="submit" value="Submit" />
+                <input  id="submit" type="submit" value="Submit"/>
             </form>
         </div>
-
-
-
     </body>
-
-
-
-
-
 
 </html>

@@ -1,36 +1,23 @@
-body {
-    background-image: url("../images/bg.jpg");
-    background-position: 60% 50%;
-}
-.head, :is(h1, h2) {
-    text-align: center;
-    font-family: "Cursive", "Verdana", "sans-serif";
-    color: black;
-}
-
 .box-head {
     text-align: center;
+    font-family: "Verdana";
 }
 
-#div1 {
-
-    margin: 0 auto;
-    justify-content: center;
-    margin-top: 170px;
-    text-align: center;
-    background-color: #b4a8f8;
-    width: 200px; 
-
-}
 #div2 {
+    font-family: "Verdana";
     display: flex;
     margin: 0 auto;     
-    background-color: #8cceba;
+    background-color: #eff5f3;
     justify-content: center;
     width: 370px;
     height: 250px;
     border-width: 2px;
     border-style: solid;
-    margin-top: 50px;
+    margin-top: 250px;   
     padding-top:10px;
+    padding-bottom: 20px;
+}
+
+#submit {
+    cursor: pointer;
 }
