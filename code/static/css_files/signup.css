@@ -1,16 +1,22 @@
 .box-head {
     text-align: center;
-    font-family: "Verdana";
+    font-family: "Helvetica";
+    font-size: 20px;
 }
 
-#div2 {
+input#username {
+    height: 30px;
+    font-size: 17px;
+}
+
+div#sform {
     font-family: "Verdana";
     display: flex;
     margin: 0 auto;     
     background-color: #eff5f3;
     justify-content: center;
-    width: 370px;
-    height: 250px;
+    width: 450px;
+    height: 300px;
     border-width: 2px;
     border-style: solid;
     margin-top: 250px;   
@@ -20,4 +26,8 @@
 
 #submit {
     cursor: pointer;
+    margin-top: 10px;
+    width: 90px;
+    height: 30px;
+    font-size: 15px;
 }
