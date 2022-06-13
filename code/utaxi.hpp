@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-
+#include "myserver.hpp"
 #include "database.hpp"
 #include "data_reader.hpp"
 #include "location.hpp"

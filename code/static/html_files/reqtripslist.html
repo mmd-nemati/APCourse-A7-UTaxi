@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html>
 
     <head>
 
-        <title>Utaxi | Sign up</title>
+        <title>Utaxi | Trips List</title>
         <link rel="icon" href="../images/favicon.ico">
         <link rel="stylesheet" href="../css_files/default.css">
-        <link rel="stylesheet" href="../css_files/signup.css">
+        <link rel="stylesheet" href="../css_files/reqtripslist.css">
 
     </head>
 
@@ -22,16 +23,21 @@
                 <li class="menuitem" onclick="location.href='http://localhost:5000/about';">About Us</li>
             </ul>
         </div>
+        
         <div id="wrapper">
 
-            <div id="sform">
-                <form action="/signup" method="post">
-                    <h4><p class="box-head">Sign up</p></h4><br>
+            <div class="form">
+                <form action="/tripslist" method="post">
+                    <h4><p class="box-head">Trips List</p></h4><br>
                     <input name="username" id="username" type="text" placeholder="Username"/><br><br>
-                    <input name="role" id="pass" type="radio" value="passenger" />
-                    <label for="pass">Passenger</label>
-                    <input name="role" id="driver" type="radio" value="driver" />
-                    <label for="driver">Driver</label><br><br><br>
+                    
+                    <input name="id-check" id="no-id" type="radio" value="no-id" />
+                    <label for="no-id" class="description">No ID</label>
+
+                    <input name="id-check" id="with-id" type="radio" value="with-id" />
+                    <label for="with-id" class="description">With ID</label><br>
+                    <input name="id" id="trip-id" type="number" min="0" value="0"/>
+
                     <input  id="submit" type="submit" value="Submit"/>
                 </form>
             </div>

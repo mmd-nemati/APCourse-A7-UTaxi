@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>Utaxi | Request Trip</title>
+        <link rel="icon" href="../images/favicon.ico">
+        <link rel="stylesheet" href="../css_files/default.css">
+        <link rel="stylesheet" href="../css_files/reqtrip.css">
+
+    </head>
+
+    <body>
+
+        <div id="head"><h1>UTAXI</h1> </div>
+        <div id="menubar">
+            <ul id="menulist">
+                <li class="menuitem" onclick="location.href='http://localhost:5000';">Home</li>
+                <li class="menuitem" onclick="location.href='http://localhost:5000/signup';">Sign Up</li>
+                <li class="menuitem" onclick="location.href='http://localhost:5000/reqtrip';">Requset Trip</li>
+                <li class="menuitem" onclick="location.href='http://localhost:5000/reqtripslist';">Trips List</li>
+                <li class="menuitem" onclick="location.href='http://localhost:5000/about';">About Us</li>
+            </ul>
+        </div>
+        
+        <div id="wrapper">
+
+            <div class="form">
+                <h4><p class="box-head">Request Trip</p></h4><br>
+                <input name="username" id="username" type="text" placeholder="Username"/><br><br>
+                <form action="/tripreq" method="post">
+                    <label for="origin">Origin: </label>
+                    <select name="origin" id="origin">
+                        <option value="" class="loc">choose origin</option>
+                        <option value="farahazd" class="loc">Farahazd</option>
+                        <option value="enghelab" class="loc">Enghelab</option>
+                    </select>
+                    <br>
+                    <label for="destination">Destination: </label>
+                    <select name="destination" id="destination">destination">
+                        <option value="" class="loc">choose destination</option>
+                        <option value="farahazd" class="loc">Farahazd</option>
+                        <option value="enghelab" class="loc">Enghelab</option>
+                    </select>
+                    <br>
+                    <input  id="submit" type="submit" value="Submit"/>
+                </form>
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

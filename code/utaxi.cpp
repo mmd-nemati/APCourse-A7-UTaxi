@@ -21,6 +21,7 @@ void Utaxi::gather_loc_data(std::string file_address)
 
 void Utaxi::run()
 {
+    MyServer server(5000);
     while(input.receive())
     {
         try
