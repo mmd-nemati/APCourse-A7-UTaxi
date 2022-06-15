@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <string>
-#include "myserver.hpp"
 #include "database.hpp"
 #include "data_reader.hpp"
 #include "location.hpp"
@@ -19,9 +18,9 @@ class Utaxi
     public:
         Utaxi();
         void gather_loc_data(std::string file_address);
-        void run();
-        void post();
-        void get();
+        void run_u();
+        void post_u();
+        void get_u();
         void web_delete();
 
         void signup();

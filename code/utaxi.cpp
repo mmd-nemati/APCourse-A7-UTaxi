@@ -19,17 +19,16 @@ void Utaxi::gather_loc_data(std::string file_address)
     }
 }
 
-void Utaxi::run()
+void Utaxi::run_u()
 {
-    MyServer server(5000);
     while(input.receive())
     {
         try
         {
             if (input.detect_command() == WebCommand::POST)
-                post();
+                post_u();
             else if(input.detect_command() == WebCommand::GET)
-                get();
+                get_u();
             else if(input.detect_command() == WebCommand::DELETE)
                 web_delete();
             else if (input.detect_command() == WebCommand::W_NONE)
@@ -42,7 +41,7 @@ void Utaxi::run()
     }
 }
 
-void Utaxi::post()
+void Utaxi::post_u()
 {
     POSTCommand::Command command = input.post_command_handle();
     if(command == POSTCommand::SIGNUP)
@@ -57,7 +56,7 @@ void Utaxi::post()
         throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
-void Utaxi::get()
+void Utaxi::get_u()
 {
     GETCommand::Command command = input.get_command_handle();
     if(command == GETCommand::TRIPS_LIST)

@@ -1,0 +1,45 @@
+#include "myserver.hpp"
+#include "interface.hpp"
+
+void Interface::server_pages(MyServer &server)
+{
+    server.get("/", new ShowPage("static/html_files/home.html"));
+    server.get("/signup", new ShowPage("static/html_files/signup.html"));
+    server.get("/reqtrip", new ShowPage("static/html_files/reqtrip.html"));
+    server.get("/trips", new ShowPage("static/html_files/trips.html"));
+    server.get("/reqtripslist", new ShowPage("static/html_files/reqtripslist.html"));
+    server.get("/showtripslist", new ShowPage("static/html_files/showtripslist.html"));
+    server.get("/finishtrip", new ShowPage("static/html_files/finishtrip.html"));
+    server.get("/canceltrip", new ShowPage("static/html_files/canceltrip.html"));
+    server.get("/about", new ShowPage("static/html_files/about.html"));
+}
+
+void Interface::server_css(MyServer &server)
+{
+    server.get("/default.css", new ShowFile("static/css_files/default.css", "text/css"));
+    server.get("/home.css", new ShowFile("static/css_files/home.css", "text/css"));
+    server.get("/signup.css", new ShowFile("static/css_files/signup.css", "text/css"));
+    server.get("/reqtrip.css", new ShowFile("static/css_files/reqtrip.css", "text/css"));
+    server.get("/trips.css", new ShowFile("static/css_files/trips.css", "text/css"));
+    server.get("/reqtripslist.css", new ShowFile("static/css_files/reqtripslist.css", "text/css"));
+    server.get("/showtripslist.css", new ShowFile("static/css_files/showtripslist.css", "text/css"));
+    server.get("/finishtrip.css", new ShowFile("static/css_files/finishtrip.css", "text/css"));
+    server.get("/canceltrip.css", new ShowFile("static/css_files/canceltrip.css", "text/css"));
+    server.get("/about.css", new ShowFile("static/css_files/about.css", "text/css"));
+}
+
+void Interface::server_js(MyServer &server)
+{
+    server.get("/error.js", new ShowFile("static/js_files/error.js", "text/js"));
+}
+
+void Interface::server_images(MyServer &server) 
+{
+    server.get("/favicon.jpg", new ShowImage("static/images/favicon.jpg"));
+    server.get("/about.png", new ShowImage("static/images/about.png"));
+}
+
+void Interface::server_handlers(MyServer &server)
+{
+   // server.post("/signup", new SignupHandler());
+}

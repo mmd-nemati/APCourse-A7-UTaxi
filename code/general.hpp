@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <fstream>
 
 #include "../defines.hpp"
 
@@ -11,6 +12,8 @@ std::vector<std::string> parse_line(std::string line, std::string delimiter);
 double calc_linear_dist(double lat1, double long1, double lat2, double long2);
 bool has_id(std::vector<std::string> tokens);
 bool has_cost_sort(std::vector<std::string> tokens);
+void change_error_text(std::string errorText);
+
 
 struct SignupCredentials 
 {

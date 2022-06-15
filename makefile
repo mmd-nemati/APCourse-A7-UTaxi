@@ -1,10 +1,11 @@
 CC := g++ -std=c++11
 EXECUTABLE := utaxi.out
 
-UTAXI_ADDTIONAL_OBJECTS :=  database.o input_control.o output_control.o
+UTAXI_ADDTIONAL_OBJECTS :=  database.o input_control.o output_control.o response.o utilities.o route.o request.o server.o myserver.o server_lists.o template_parser.o utaxi.o
 DATABASE_OBJECTS := general.o data_reader.o location.o member.o passenger.o driver.o trip.o
 
 DEFINES := defines.hpp
+INTERFACE := code/interface
 UTAXI := code/utaxi
 DATABASE := code/database
 GENERAL := code/general
@@ -25,10 +26,37 @@ all: ${EXECUTABLE}
 ${EXECUTABLE}: main.o
 	${CC} *.o -o ${EXECUTABLE}
 
-main.o: main.cpp utaxi.o
+main.o: ${INTERFACE}.hpp server/server.hpp main.cpp interface.o
 	${CC} -c main.cpp -o main.o
 
-utaxi.o: ${UTAXI}.cpp ${UTAXI}.hpp ${UTAXI_ADDTIONAL_OBJECTS} ${DEFINES}
+interface.o: ${INTERFACE}.hpp ${INTERFACE}.cpp ${UTAXI_ADDTIONAL_OBJECTS} ${DEFINES}
+	${CC} -c code/interface.cpp -o interface.o
+
+response.o: utils/response.hpp utils/response.cpp utils/include.hpp
+	${CC} -c utils/response.cpp -o response.o
+
+request.o: utils/request.cpp utils/request.hpp utils/include.hpp utils/utilities.hpp
+	${CC} -c utils/request.cpp -o request.o
+
+utilities.o: utils/utilities.cpp utils/utilities.hpp
+	${CC} -c utils/utilities.cpp -o utilities.o
+
+server.o: server/server.cpp server/server.hpp server/route.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp utils/template_parser.hpp utils/template_parser.cpp
+	${CC} -c server/server.cpp -o server.o
+
+route.o: server/route.cpp server/route.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
+	${CC} -c server/route.cpp -o route.o
+
+template_parser.o: utils/template_parser.cpp utils/template_parser.hpp utils/request.cpp utils/request.hpp utils/utilities.hpp utils/utilities.cpp
+	$(CC) -c utils/template_parser.cpp -o template_parser.o
+
+myserver.o: code/myserver.cpp code/myserver.hpp server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
+	${CC} -c code/myserver.cpp -o myserver.o
+
+server_lists.o: ${INTERFACE}.hpp code/server_lists.cpp
+	${CC} -c code/server_lists.cpp -o server_lists.o	
+
+utaxi.o: ${UTAXI}.cpp ${UTAXI}.hpp ${DEFINES}
 	${CC} -c ${UTAXI}.cpp -o utaxi.o
 
 database.o: ${DATABASE}.cpp ${DATABASE}.hpp ${DATABASE_OBJECTS} ${DEFINES}

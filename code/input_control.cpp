@@ -19,9 +19,9 @@ bool InputControl::receive()
 
 WebCommand::Command InputControl::detect_command()
 {
-    if(tokens[0] == GET)
+    if(tokens[0] == GET_)
         return WebCommand::GET;
-    else if(tokens[0] == POST)
+    else if(tokens[0] == POST_)
         return WebCommand::POST;
     else if(tokens[0] == DELETE)
         return WebCommand::DELETE;
