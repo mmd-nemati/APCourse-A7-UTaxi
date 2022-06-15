@@ -18,8 +18,7 @@
             <ul id="menulist">
                 <li class="menuitem" onclick="location.href='http://localhost:5000';">Home</li>
                 <li class="menuitem" onclick="location.href='http://localhost:5000/signup';">Sign Up</li>
-                <li class="menuitem" onclick="location.href='http://localhost:5000/reqtrip';">Requset Trip</li>
-                <li class="menuitem" onclick="location.href='http://localhost:5000/reqtripslist';">Trips List</li>
+                <li class="menuitem" onclick="location.href='http://localhost:5000/trips';">Trips</li>
                 <li class="menuitem" onclick="location.href='http://localhost:5000/about';">About Us</li>
             </ul>
         </div>
@@ -28,16 +27,20 @@
 
             <div class="form">
                 <form action="/tripslist" method="post">
-                    <h4><p class="box-head">Trips List</p></h4><br>
-                    <input name="username" id="username" type="text" placeholder="Username"/><br><br>
-                    
+                    <h4><p class="box-head">Trips List</p></h4>
+                    <br>
+                    <input name="username" id="username" type="text" placeholder="Username"/>
+                    <br><br>
                     <input name="id-check" id="no-id" type="radio" value="no-id" />
                     <label for="no-id" class="description">No ID</label>
-
                     <input name="id-check" id="with-id" type="radio" value="with-id" />
-                    <label for="with-id" class="description">With ID</label><br>
-                    <input name="id" id="trip-id" type="number" min="0" value="0"/>
-
+                    <label for="with-id" class="description">With ID</label>
+                    <br>
+                    <input name="id" id="trip-id" type="num ber" min="0" value="0"/>
+                    <br>
+                    <label for="sorted" class="sorted-description">Sort by cost?</label>
+                    <input name="sort_by_cost" id="sorted" type="checkbox" value="yes">
+                    <br>
                     <input  id="submit" type="submit" value="Submit"/>
                 </form>
             </div>

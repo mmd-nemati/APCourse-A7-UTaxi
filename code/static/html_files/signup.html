@@ -17,8 +17,7 @@
             <ul id="menulist">
                 <li class="menuitem" onclick="location.href='http://localhost:5000';">Home</li>
                 <li class="menuitem" onclick="location.href='http://localhost:5000/signup';">Sign Up</li>
-                <li class="menuitem" onclick="location.href='http://localhost:5000/reqtrip';">Requset Trip</li>
-                <li class="menuitem" onclick="location.href='http://localhost:5000/reqtripslist';">Trips List</li>
+                <li class="menuitem" onclick="location.href='http://localhost:5000/trips';">Trips</li>
                 <li class="menuitem" onclick="location.href='http://localhost:5000/about';">About Us</li>
             </ul>
         </div>
@@ -28,7 +27,7 @@
                 <form action="/signup" method="post">
                     <h4><p class="box-head">Sign up</p></h4><br>
                     <input name="username" id="username" type="text" placeholder="Username"/><br><br>
-                    <input name="role" id="pass" type="radio" value="passenger" />
+                    <input name="role" id="pass" type="radio" value="passenger" checked="checked"/>
                     <label for="pass">Passenger</label>
                     <input name="role" id="driver" type="radio" value="driver" />
                     <label for="driver">Driver</label><br><br><br>

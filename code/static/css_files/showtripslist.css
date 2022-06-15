@@ -12,8 +12,8 @@
     border-width: 1px;
     border-style: solid;
     background-color: #ece7e7;
-    width: 1200px;
-    height: 600px;
+    width: 1400px;
+    height: 700px;
 }
 
 #trips {
@@ -34,6 +34,7 @@
 #trips tr:hover {
     background-color: #ddd;
 }
+
 #trips th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -41,4 +42,23 @@
     background-color: #04AA6D;
     height: 30px;
     color: white;
-  }
+}
+
+input#username {
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    margin-top: 150px;
+    height: 30px;
+    font-size: 17px;
+}
+
+#submit {
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    width: 90px;
+    height: 30px;   
+    font-size: 15px;
+}
