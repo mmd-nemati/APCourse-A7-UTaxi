@@ -44,9 +44,9 @@ void Utaxi::run_u()
 void Utaxi::post_u()
 {
     POSTCommand::Command command = input.post_command_handle();
-    if(command == POSTCommand::SIGNUP)
-        signup();
-    else if(command == POSTCommand::REQUEST)
+//  /    if(command == POSTCommand::SIGNUP)
+    //    signup();
+    if(command == POSTCommand::REQUEST)
         post_trips();
     else if(command == POSTCommand::ACCEPT)
         accept();
@@ -79,9 +79,9 @@ void Utaxi::web_delete()
         throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
-void Utaxi::signup()
+void Utaxi::signup(SignupCredentials new_signup)
 {
-    SignupCredentials new_signup = input.send_signup_credentials();
+    //SignupCredentials new_signup = input.send_signup_credentials();
 
     check_signup_role(new_signup);
     database.check_user_exist(new_signup.username);

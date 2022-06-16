@@ -16,6 +16,21 @@ class Interface
         void server_js(MyServer &server);
         void server_images(MyServer &server);
         void server_handlers(MyServer &server);
+
+        class SignupPageHandler : public RequestHandler
+        {
+            public:
+                SignupPageHandler();
+                Response *callback(Request *req);
+        };
+        class SignupHandler : public RequestHandler
+        {
+            public:
+                SignupHandler(Utaxi *utaxi);
+                Response *callback(Request *req);
+            private:
+                Utaxi *utaxi;
+        };
 };
 
 #endif /* __INTERFACE_H__ */

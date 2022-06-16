@@ -23,7 +23,7 @@ class Utaxi
         void get_u();
         void web_delete();
 
-        void signup();
+        void signup(SignupCredentials new_signup);
         void post_trips();
         void accept();
         void finish();

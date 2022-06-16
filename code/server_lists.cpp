@@ -1,5 +1,6 @@
 #include "myserver.hpp"
 #include "interface.hpp"
+#include "handlers.hpp"
 
 void Interface::server_pages(MyServer &server)
 {
@@ -41,5 +42,6 @@ void Interface::server_images(MyServer &server)
 
 void Interface::server_handlers(MyServer &server)
 {
-   // server.post("/signup", new SignupHandler());
+    server.get("/signuppage", new SignupPageHandler());
+    server.post("/signup", new SignupHandler(utaxi));
 }
