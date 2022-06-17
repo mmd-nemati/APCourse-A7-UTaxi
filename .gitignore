@@ -39,4 +39,6 @@
 
 # Other
 *.zip
-*.in
+
+# Linux
+.~lock*
