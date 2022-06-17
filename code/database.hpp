@@ -52,7 +52,7 @@ class Database
 
         std::vector<Trip*> get_id_sorted_trips() { return trips; }
         std::vector<Trip*> get_cost_sorted_trips();
-
+        std::vector<Location*> get_locs() { return locations; }
     private:
         std::vector<Location*> locations;
         std::vector<Member*> members;

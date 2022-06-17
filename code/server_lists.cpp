@@ -6,7 +6,7 @@ void Interface::server_pages(MyServer &server)
 {
     server.get("/", new ShowPage("static/html_files/home.html"));
     server.get("/signup", new ShowPage("static/html_files/signup.html"));
-    server.get("/reqtrip", new ShowPage("static/html_files/reqtrip.html"));
+    //server.get("/reqtrip", new ShowPage("static/html_files/reqtrip.html"));
     server.get("/trips", new ShowPage("static/html_files/trips.html"));
     server.get("/reqtripslist", new ShowPage("static/html_files/reqtripslist.html"));
     server.get("/showtripslist", new ShowPage("static/html_files/showtripslist.html"));
@@ -45,5 +45,6 @@ void Interface::server_handlers(MyServer &server)
     server.get("/signuppage", new SignupPageHandler());
     server.post("/signup", new SignupHandler(utaxi));
     server.get("/reqtrippage", new ReqTripPageHandler());
+    server.get("/reqtrip", new ShowReqTripHandler(utaxi));
     server.post("/reqtrip", new ReqTripHandler(utaxi));
 }

@@ -40,6 +40,14 @@ class Interface
                 Response *callback(Request *req);
         };
 
+        class ShowReqTripHandler : public RequestHandler
+        {
+            public: ShowReqTripHandler(Utaxi *utaxi_);
+                    Response *callback(Request *req);
+            private:
+                Utaxi *utaxi;
+        };
+        
         class ReqTripHandler : public RequestHandler
         {
             public:

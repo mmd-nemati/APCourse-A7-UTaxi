@@ -1,7 +1,7 @@
 CC := g++ -std=c++11
 EXECUTABLE := utaxi.out
 
-UTAXI_ADDTIONAL_OBJECTS :=  database.o input_control.o output_control.o response.o utilities.o route.o request.o server.o myserver.o handlers.o server_lists.o template_parser.o utaxi.o
+UTAXI_ADDTIONAL_OBJECTS :=  database.o input_control.o output_control.o response.o utilities.o route.o request.o server.o myserver.o html_maker.o handlers.o server_lists.o template_parser.o utaxi.o
 DATABASE_OBJECTS := general.o data_reader.o location.o member.o passenger.o driver.o trip.o
 
 DEFINES := defines.hpp
@@ -53,7 +53,10 @@ template_parser.o: utils/template_parser.cpp utils/template_parser.hpp utils/req
 myserver.o: code/myserver.cpp code/myserver.hpp server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
 	${CC} -c code/myserver.cpp -o myserver.o
 
-handlers.o: code/handlers.cpp code/handlers.hpp code/interface.hpp utils/response.hpp code/myserver.hpp server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
+html_maker.o: code/html_maker.hpp code/html_maker.cpp
+	${CC} -c code/html_maker.cpp -o html_maker.o
+
+handlers.o: code/handlers.cpp code/handlers.hpp code/html_maker.hpp code/interface.hpp utils/response.hpp code/myserver.hpp server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
 	${CC} -c code/handlers.cpp -o handlers.o
 
 server_lists.o: ${INTERFACE}.hpp code/server_lists.cpp

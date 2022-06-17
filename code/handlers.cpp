@@ -4,7 +4,7 @@
 Interface::SignupPageHandler::SignupPageHandler() {};
 Response *Interface::SignupPageHandler::callback(Request *req)
 {
-    Response *res;
+    Response *res = new Response;
     change_error_text("");
     res = Response::redirect("/signup");
     return res;
@@ -13,13 +13,13 @@ Response *Interface::SignupPageHandler::callback(Request *req)
 Interface::SignupHandler::SignupHandler(Utaxi *utaxi_) { utaxi = utaxi_; }
 Response *Interface::SignupHandler::callback(Request *req)
 {
+    Response *res = new Response;
     change_error_text("");
     SignupCredentials new_signup;
     std::string username = req->getBodyParam("username");
     std::string role = req->getBodyParam("role");
     new_signup.username = (username == "" ? EMPTY_ARG : username);
     new_signup.role = req->getBodyParam("role");
-    Response *res;
     try 
     {
         utaxi->signup(new_signup);
@@ -38,16 +38,25 @@ Response *Interface::SignupHandler::callback(Request *req)
 Interface::ReqTripPageHandler::ReqTripPageHandler() {};
 Response *Interface::ReqTripPageHandler::callback(Request *req)
 {
-    Response *res;
+    Response *res = new Response;
     change_error_text("");
     res = Response::redirect("/reqtrip");
+    return res;
+}
+
+Interface::ShowReqTripHandler::ShowReqTripHandler(Utaxi *utaxi_) { utaxi = utaxi_;}
+Response *Interface::ShowReqTripHandler::callback(Request *req)
+{
+    Response *res = new Response;
+    res->setHeader("Content-Type", "text/html");
+    res->setBody(req_trip_html(utaxi->get_locs()));
     return res;
 }
 
 Interface::ReqTripHandler::ReqTripHandler(Utaxi *utaxi_) { utaxi = utaxi_;}
 Response *Interface::ReqTripHandler::callback(Request *req)
 {
-    change_error_text("");
+    Response *res = new Response;
     TripRequestTokens new_trip;
     std::string username = req->getBodyParam("username");
     std::string origin = req->getBodyParam("origin");
@@ -57,7 +66,6 @@ Response *Interface::ReqTripHandler::callback(Request *req)
     new_trip.origin_name = (origin == "" ? EMPTY_ARG : origin);
     new_trip.destination_name = (destination == "" ? EMPTY_ARG : destination);
     new_trip.in_hurry = req->getBodyParam("in_hurry");
-    Response *res;
     try 
     {
         if(form_req == "Request")

@@ -33,6 +33,7 @@ class Utaxi
 
         int get_cost(TripRequestTokens new_cost_tokens);
         int get_trips_count() { return trips_counter; }
+        std::vector<Location*> get_locs() { return database.get_locs(); }
     private:
         InputControl input;
         OutputControl output;

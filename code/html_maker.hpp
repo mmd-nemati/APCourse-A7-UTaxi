@@ -1,0 +1,14 @@
+#ifndef __HTML_MAKER_H__
+#define __HTML_MAKER_H__
+#include <string>
+#include <vector>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include "trip.hpp"
+#include "location.hpp"
+#include "myserver.hpp"
+
+std::string req_trip_html(const std::vector<Location*> &locations);
+
+#endif /* __HTML_MAKER_H__ */
