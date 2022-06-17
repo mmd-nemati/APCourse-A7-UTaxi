@@ -10,7 +10,6 @@ void Interface::run(char *argv[])
         MyServer server(5000);
         try
         {
-    std::cout << "----dasdas" << std::endl;
             server_pages(server);
             server_css(server);
             server_js(server);

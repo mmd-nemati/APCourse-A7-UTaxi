@@ -47,11 +47,27 @@ class Interface
             private:
                 Utaxi *utaxi;
         };
-        
+
         class ReqTripHandler : public RequestHandler
         {
             public:
                 ReqTripHandler(Utaxi *utaxi_);
+                Response *callback(Request *req);
+            private:
+                Utaxi *utaxi;
+        };
+
+        class CancelTripPageHandler : public RequestHandler
+        {
+            public:
+                CancelTripPageHandler();
+                Response *callback(Request *req);
+        };
+
+        class CancelTripHandler : public RequestHandler
+        {
+            public:
+                CancelTripHandler(Utaxi *utaxi_);
                 Response *callback(Request *req);
             private:
                 Utaxi *utaxi;

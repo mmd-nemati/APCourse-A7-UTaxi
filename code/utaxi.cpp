@@ -29,8 +29,8 @@ void Utaxi::run_u()
                 post_u();
             else if(input.detect_command() == WebCommand::GET)
                 get_u();
-            else if(input.detect_command() == WebCommand::DELETE)
-                web_delete();
+          //  else if(input.detect_command() == WebCommand::DELETE)
+           //     web_delete();
             else if (input.detect_command() == WebCommand::W_NONE)
                 break;
         }
@@ -70,14 +70,14 @@ void Utaxi::get_u()
         throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
-void Utaxi::web_delete()
+/*void Utaxi::web_delete()
 {
     DELETECommand::Command command = input.delete_command_handle();
     if(command == DELETECommand::TRIPS)
         delete_trip();
     else
         throw std::runtime_error(NOT_FOUND_ERROR);
-}
+}*/
 
 void Utaxi::signup(SignupCredentials new_signup)
 {
@@ -154,14 +154,14 @@ int Utaxi::get_cost(TripRequestTokens new_cost_tokens)
    // output.cost(cost);
 }
 
-void Utaxi::delete_trip()
+void Utaxi::delete_trip(TripIntractTokens new_delete_trip_tokens)
 {
-    TripIntractTokens new_delete_trip_tokens = input.send_delete_trip_tokens();
+    //  TripIntractTokens new_delete_trip_tokens = input.send_delete_trip_tokens();
     database.check_delete_trip_errors(new_delete_trip_tokens);
 
     database.find_trip_by_id(new_delete_trip_tokens.id)->delete_yourself();
    
-    output.done();
+    //output.done();
 }
 
 void Utaxi::check_signup_role(std::string role)

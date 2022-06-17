@@ -90,3 +90,34 @@ Response *Interface::ReqTripHandler::callback(Request *req)
 
     return res;
 }
+
+Interface::CancelTripPageHandler::CancelTripPageHandler() {};
+Response *Interface::CancelTripPageHandler::callback(Request *req)
+{
+    Response *res = new Response;
+    change_error_text("");
+    res = Response::redirect("/canceltrip");
+    return res;
+}
+
+Interface::CancelTripHandler::CancelTripHandler(Utaxi *utaxi_) { utaxi = utaxi_; }
+Response *Interface::CancelTripHandler::callback(Request *req)
+{
+    Response *res = new Response;
+    TripIntractTokens new_cancel;
+    new_cancel.username = req->getBodyParam("username");
+    new_cancel.id = (stoi(req->getBodyParam("id")) == 0 ? -1 : stoi(req->getBodyParam("id")));
+    try
+    {
+        utaxi->delete_trip(new_cancel);
+        change_error_text("Trip canceled!");
+        res = Response::redirect("/canceltrip");
+    }
+    catch(std::runtime_error &er)
+    {
+        change_error_text(er.what());
+        res = Response::redirect("/canceltrip");
+    }
+
+    return res;
+}

@@ -47,4 +47,6 @@ void Interface::server_handlers(MyServer &server)
     server.get("/reqtrippage", new ReqTripPageHandler());
     server.get("/reqtrip", new ShowReqTripHandler(utaxi));
     server.post("/reqtrip", new ReqTripHandler(utaxi));
+    server.get("/canceltrippage", new CancelTripPageHandler());
+    server.post("/canceltrip", new CancelTripHandler(utaxi));
 }

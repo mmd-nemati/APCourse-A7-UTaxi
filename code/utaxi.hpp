@@ -29,7 +29,7 @@ class Utaxi
         void finish();
         void trips_list();
         void trip_data();
-        void delete_trip();
+        void delete_trip(TripIntractTokens new_delete_trip_tokens);
 
         int get_cost(TripRequestTokens new_cost_tokens);
         int get_trips_count() { return trips_counter; }
