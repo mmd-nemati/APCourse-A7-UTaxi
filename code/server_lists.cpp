@@ -44,4 +44,6 @@ void Interface::server_handlers(MyServer &server)
 {
     server.get("/signuppage", new SignupPageHandler());
     server.post("/signup", new SignupHandler(utaxi));
+    server.get("/reqtrippage", new ReqTripPageHandler());
+    server.post("/reqtrip", new ReqTripHandler(utaxi));
 }

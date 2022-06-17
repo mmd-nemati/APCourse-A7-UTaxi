@@ -46,9 +46,9 @@ void Utaxi::post_u()
     POSTCommand::Command command = input.post_command_handle();
 //  /    if(command == POSTCommand::SIGNUP)
     //    signup();
-    if(command == POSTCommand::REQUEST)
-        post_trips();
-    else if(command == POSTCommand::ACCEPT)
+    //if(command == POSTCommand::REQUEST)
+     //   post_trips();
+    if(command == POSTCommand::ACCEPT)
         accept();
     else if(command == POSTCommand::FINISH)
         finish();
@@ -63,8 +63,8 @@ void Utaxi::get_u()
         trips_list();
     else if(command == GETCommand::TRIP_DATA)
         trip_data();
-    else if(command == GETCommand::COST)
-        get_cost();
+    //else if(command == GETCommand::COST)
+     //   get_cost();
     
     else
         throw std::runtime_error(NOT_FOUND_ERROR);
@@ -83,16 +83,17 @@ void Utaxi::signup(SignupCredentials new_signup)
 {
     //SignupCredentials new_signup = input.send_signup_credentials();
 
-    check_signup_role(new_signup);
+    check_signup_role(new_signup.role);
+    check_signup_username(new_signup.username);
     database.check_user_exist(new_signup.username);
     database.add_member(new_signup);
 
     output.done();
 }
 
-void Utaxi::post_trips()
+void Utaxi::post_trips(TripRequestTokens new_trip_tokens)
 {
-    TripRequestTokens new_trip_tokens = input.send_trip_req_tokens();
+    //TripRequestTokens new_trip_tokens = input.send_trip_req_tokens();
     check_new_trip_arguments(new_trip_tokens);
     database.check_passenger_trip_errors(new_trip_tokens);
 
@@ -143,14 +144,14 @@ void Utaxi::trip_data()
     output.trip_data(database.find_trip_by_id(new_trip_data_tokens.id));
 }
 
-void Utaxi::get_cost()
+int Utaxi::get_cost(TripRequestTokens new_cost_tokens)
 {
-    TripRequestTokens new_cost_tokens = input.send_trip_req_tokens();
+    //TripRequestTokens new_cost_tokens = input.send_trip_req_tokens();
     database.check_passenger_trip_errors(new_cost_tokens);
 
-    double cost = database.calc_trip_cost(new_cost_tokens);
-
-    output.cost(cost);
+    int cost = database.calc_trip_cost(new_cost_tokens);
+    return cost;
+   // output.cost(cost);
 }
 
 void Utaxi::delete_trip()
@@ -163,9 +164,15 @@ void Utaxi::delete_trip()
     output.done();
 }
 
-void Utaxi::check_signup_role(SignupCredentials new_signup)
+void Utaxi::check_signup_role(std::string role)
 {
-    if(new_signup.role != DRIVER_ROLE && new_signup.role != PASSENGER_ROLE)
+    if(role != DRIVER_ROLE && role != PASSENGER_ROLE)
+        throw std::runtime_error(BAD_REQUEST_ERROR);
+}
+
+void Utaxi::check_signup_username(std::string username)
+{
+    if(username == EMPTY_ARG)
         throw std::runtime_error(BAD_REQUEST_ERROR);
 }
 

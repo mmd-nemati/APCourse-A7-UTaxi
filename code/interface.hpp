@@ -23,14 +23,32 @@ class Interface
                 SignupPageHandler();
                 Response *callback(Request *req);
         };
+
         class SignupHandler : public RequestHandler
         {
             public:
-                SignupHandler(Utaxi *utaxi);
+                SignupHandler(Utaxi *utaxi_);
                 Response *callback(Request *req);
             private:
                 Utaxi *utaxi;
         };
+
+        class ReqTripPageHandler : public RequestHandler
+        {
+            public:
+                ReqTripPageHandler();
+                Response *callback(Request *req);
+        };
+
+        class ReqTripHandler : public RequestHandler
+        {
+            public:
+                ReqTripHandler(Utaxi *utaxi_);
+                Response *callback(Request *req);
+            private:
+                Utaxi *utaxi;
+        };
+
 };
 
 #endif /* __INTERFACE_H__ */

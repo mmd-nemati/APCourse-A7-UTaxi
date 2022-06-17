@@ -32,15 +32,15 @@
                     <label for="origin">Origin: </label>
                     <select name="origin" id="origin">
                         <option value="" class="loc">choose origin</option>
-                        <option value="farahazd" class="loc">Farahazd</option>
-                        <option value="enghelab" class="loc">Enghelab</option>
+                        <option value="Farahzad" class="loc">Farahzad</option>
+                        <option value="Enghelab" class="loc">Enghelab</option>
                     </select>
                     <br>
                     <label for="destination">Destination: </label>
                     <select name="destination" id="destination">destination">
                         <option value="" class="loc">choose destination</option>
-                        <option value="farahazd" class="loc">Farahazd</option>
-                        <option value="enghelab" class="loc">Enghelab</option>
+                        <option value="Farahzad" class="loc">Farahzad</option>
+                        <option value="Enghelab" class="loc">Enghelab</option>
                     </select>
                     <br><br>
                     <label for="in_hurry:" id="hurry">Hurry:
@@ -48,13 +48,13 @@
                     <label for="yes_hurry">Yes</label>
                     <input name="in_hurry" id="no_hurry" type="radio" value="no" checked="checked"/>
                     <label for="no_hurry">No</label><br><br>
-                    <input  id="submit" type="submit" value="Request" formaction="/tripreq"/>
-                    <input id="cost" type="submit" value="Calculate Cost" formaction="/tripcost">
+                    <input  id="req" type="submit" name="submit" value="Request" formaction="/reqtrip"/>
+                    <input id="cost" type="submit" name="submit" value="Calculate Cost" formaction="/reqtrip">
                 </form>
             </div>
 
         </div>
 
     </body>
-
+    <script type="text/javascript" src="error.js"></script>
 </html>

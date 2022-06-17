@@ -24,22 +24,23 @@ class Utaxi
         void web_delete();
 
         void signup(SignupCredentials new_signup);
-        void post_trips();
+        void post_trips(TripRequestTokens new_trip_tokens);
         void accept();
         void finish();
         void trips_list();
         void trip_data();
         void delete_trip();
 
-        void get_cost();
-        
+        int get_cost(TripRequestTokens new_cost_tokens);
+        int get_trips_count() { return trips_counter; }
     private:
         InputControl input;
         OutputControl output;
         Database database;
         int trips_counter;
 
-        void check_signup_role(SignupCredentials new_signup);
+        void check_signup_role(std::string role);
+        void check_signup_username(std::string username);
         void check_new_trip_arguments(TripRequestTokens new_trip_tokens);
 };
 
