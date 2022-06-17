@@ -121,3 +121,34 @@ Response *Interface::CancelTripHandler::callback(Request *req)
 
     return res;
 }
+
+Interface::FinishTripPageHandler::FinishTripPageHandler() {};
+Response *Interface::FinishTripPageHandler::callback(Request *req)
+{
+    Response *res = new Response;
+    change_error_text("");
+    res = Response::redirect("/finishtrip");
+    return res;
+}
+
+Interface::FinishTripHandler::FinishTripHandler(Utaxi *utaxi_) { utaxi = utaxi_; }
+Response *Interface::FinishTripHandler::callback(Request *req)
+{
+    Response *res = new Response;
+    TripIntractTokens new_finish;
+    new_finish.username = req->getBodyParam("username");
+    new_finish.id = (stoi(req->getBodyParam("id")) == 0 ? -1 : stoi(req->getBodyParam("id")));
+    try
+    {
+        utaxi->finish(new_finish);
+        change_error_text("Trip finished!");
+        res = Response::redirect("/finishtrip");
+    }
+    catch(std::runtime_error &er)
+    {
+        change_error_text(er.what());
+        res = Response::redirect("/finishtrip");
+    }
+
+    return res;
+}

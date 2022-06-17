@@ -50,8 +50,8 @@ void Utaxi::post_u()
      //   post_trips();
     if(command == POSTCommand::ACCEPT)
         accept();
-    else if(command == POSTCommand::FINISH)
-        finish();
+    //else if(command == POSTCommand::FINISH)
+     //   finish();
     else
         throw std::runtime_error(NOT_FOUND_ERROR);
 }
@@ -116,9 +116,9 @@ void Utaxi::accept()
     output.done();
 }
 
-void Utaxi::finish()
+void Utaxi::finish(TripIntractTokens new_finish_tokens)
 {
-    TripIntractTokens new_finish_tokens = input.send_accpet_finish_tokens();
+    //TripIntractTokens new_finish_tokens = input.send_accpet_finish_tokens();
     database.check_finish_errors(new_finish_tokens);
 
     database.find_passenger_by_trip(new_finish_tokens.id)->stop_travel();

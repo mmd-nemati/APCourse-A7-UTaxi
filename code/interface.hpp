@@ -72,6 +72,22 @@ class Interface
             private:
                 Utaxi *utaxi;
         };
+        
+        class FinishTripPageHandler : public RequestHandler
+        {
+            public:
+                FinishTripPageHandler();
+                Response *callback(Request *req);
+        };
+
+        class FinishTripHandler : public RequestHandler
+        {
+            public:
+                FinishTripHandler(Utaxi *utaxi_);
+                Response *callback(Request *req);
+            private:
+                Utaxi *utaxi;
+        };
 
 };
 

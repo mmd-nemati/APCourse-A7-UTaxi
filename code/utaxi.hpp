@@ -26,7 +26,7 @@ class Utaxi
         void signup(SignupCredentials new_signup);
         void post_trips(TripRequestTokens new_trip_tokens);
         void accept();
-        void finish();
+        void finish(TripIntractTokens new_finish_tokens);
         void trips_list();
         void trip_data();
         void delete_trip(TripIntractTokens new_delete_trip_tokens);
