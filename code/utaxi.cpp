@@ -27,8 +27,8 @@ void Utaxi::run_u()
         {
             if (input.detect_command() == WebCommand::POST)
                 post_u();
-            else if(input.detect_command() == WebCommand::GET)
-                get_u();
+            //else if(input.detect_command() == WebCommand::GET)
+             //   get_u();
           //  else if(input.detect_command() == WebCommand::DELETE)
            //     web_delete();
             else if (input.detect_command() == WebCommand::W_NONE)
@@ -48,15 +48,15 @@ void Utaxi::post_u()
     //    signup();
     //if(command == POSTCommand::REQUEST)
      //   post_trips();
-    if(command == POSTCommand::ACCEPT)
-        accept();
+    //if(command == POSTCommand::ACCEPT)
+   //     accept();
     //else if(command == POSTCommand::FINISH)
      //   finish();
-    else
-        throw std::runtime_error(NOT_FOUND_ERROR);
+   // else
+    //    throw std::runtime_error(NOT_FOUND_ERROR);
 }
 
-void Utaxi::get_u()
+/*void Utaxi::get_u()
 {
     GETCommand::Command command = input.get_command_handle();
     if(command == GETCommand::TRIPS_LIST)
@@ -68,7 +68,7 @@ void Utaxi::get_u()
     
     else
         throw std::runtime_error(NOT_FOUND_ERROR);
-}
+}*/
 
 /*void Utaxi::web_delete()
 {
@@ -103,9 +103,9 @@ void Utaxi::post_trips(TripRequestTokens new_trip_tokens)
     output.trip_id(trips_counter);
 }
 
-void Utaxi::accept()
+void Utaxi::accept(TripIntractTokens new_accpet_tokens)
 {
-    TripIntractTokens new_accpet_tokens = input.send_accpet_finish_tokens();
+    //TripIntractTokens new_accpet_tokens = input.send_accpet_finish_tokens();
     database.check_accept_errors(new_accpet_tokens);
 
     database.find_passenger_by_trip(new_accpet_tokens.id)->start_to_travel();
@@ -113,7 +113,7 @@ void Utaxi::accept()
     database.find_trip_by_id(new_accpet_tokens.id)->start();
     database.find_trip_by_id(new_accpet_tokens.id)->set_driver(database.find_member_by_username(new_accpet_tokens.username));
     
-    output.done();
+    //output.done();
 }
 
 void Utaxi::finish(TripIntractTokens new_finish_tokens)
@@ -128,20 +128,23 @@ void Utaxi::finish(TripIntractTokens new_finish_tokens)
     output.done();
 }
 
-void Utaxi::trips_list()
+void Utaxi::trips_list(TripIntractTokens new_trips_list_tokens)
 {
-    TripIntractTokens new_trips_list_tokens = input.send_get_trips_tokens();
+    //TripIntractTokens new_trips_list_tokens = input.send_get_trips_tokens();
     database.check_is_driver(new_trips_list_tokens.username);
-    output.trips_list(database.get_trips(new_trips_list_tokens.cost_sorted));
+    target_trips = database.get_trips(new_trips_list_tokens.cost_sorted);
+    //return target_trips;
+   // output.trips_list(database.get_trips(new_trips_list_tokens.cost_sorted));
 }
 
-void Utaxi::trip_data()
+void Utaxi::trip_data(TripIntractTokens new_trip_data_tokens)
 {
-    TripIntractTokens new_trip_data_tokens = input.send_get_trips_tokens();
+    //TripIntractTokens new_trip_data_tokens = input.send_get_trips_tokens();
     database.check_is_driver(new_trip_data_tokens.username);
     database.check_trip_is_available(new_trip_data_tokens.id);
-
-    output.trip_data(database.find_trip_by_id(new_trip_data_tokens.id));
+    target_trips.clear();
+    target_trips.push_back(database.find_trip_by_id(new_trip_data_tokens.id));
+    //return target_trips;
 }
 
 int Utaxi::get_cost(TripRequestTokens new_cost_tokens)

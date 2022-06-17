@@ -10,5 +10,5 @@
 #include "myserver.hpp"
 
 std::string req_trip_html(const std::vector<Location*> &locations);
-
+std::string req_trips_list_html(const std::vector<Trip*> &trips);
 #endif /* __HTML_MAKER_H__ */

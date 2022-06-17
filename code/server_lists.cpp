@@ -9,7 +9,7 @@ void Interface::server_pages(MyServer &server)
     //server.get("/reqtrip", new ShowPage("static/html_files/reqtrip.html"));
     server.get("/trips", new ShowPage("static/html_files/trips.html"));
     server.get("/reqtripslist", new ShowPage("static/html_files/reqtripslist.html"));
-    server.get("/showtripslist", new ShowPage("static/html_files/showtripslist.html"));
+    //server.get("/showtripslist", new ShowPage("static/html_files/showtripslist.html"));
     server.get("/finishtrip", new ShowPage("static/html_files/finishtrip.html"));
     server.get("/canceltrip", new ShowPage("static/html_files/canceltrip.html"));
     server.get("/about", new ShowPage("static/html_files/about.html"));
@@ -44,11 +44,20 @@ void Interface::server_handlers(MyServer &server)
 {
     server.get("/signuppage", new SignupPageHandler());
     server.post("/signup", new SignupHandler(utaxi));
+
     server.get("/reqtrippage", new ReqTripPageHandler());
     server.get("/reqtrip", new ShowReqTripHandler(utaxi));
     server.post("/reqtrip", new ReqTripHandler(utaxi));
+
     server.get("/canceltrippage", new CancelTripPageHandler());
     server.post("/canceltrip", new CancelTripHandler(utaxi));
     server.get("/finishtrippage", new FinishTripPageHandler());
     server.post("/finishtrip", new FinishTripHandler(utaxi));
+
+    server.get("/reqtripslistpage", new ReqTripsListPageHandler());
+    server.post("/reqtripslist", new ReqTripsListHandler(utaxi));
+
+    server.get("/showtripslistpage", new TripsListPageHandler());
+    server.get("/showtripslist", new ShowTripsListHandler(utaxi));
+    server.post("/showtripslist", new AcceptTripHandler(utaxi));
 }

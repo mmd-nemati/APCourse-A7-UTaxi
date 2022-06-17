@@ -152,3 +152,76 @@ Response *Interface::FinishTripHandler::callback(Request *req)
 
     return res;
 }
+
+Interface::ReqTripsListPageHandler::ReqTripsListPageHandler() {};
+Response *Interface::ReqTripsListPageHandler::callback(Request *req)
+{
+    Response *res = new Response;
+    change_error_text("");
+    res = Response::redirect("/reqtripslist");
+    return res;
+}
+
+Interface::ReqTripsListHandler::ReqTripsListHandler(Utaxi *utaxi_) { utaxi = utaxi_; };
+Response *Interface::ReqTripsListHandler::callback(Request *req)
+{
+    change_error_text("");
+    Response *res = new Response;
+    TripIntractTokens new_list;
+    new_list.username = req->getBodyParam("username");
+    new_list.id = (stoi(req->getBodyParam("id")) == 0 ? -1 : stoi(req->getBodyParam("id")));
+    new_list.cost_sorted = (req->getBodyParam("sort_by_cost") == "" ? "no" : "yes");
+    try
+    {
+        req->getBodyParam("id-check") == "no-id" ? (utaxi->trips_list(new_list)) : (utaxi->trip_data(new_list));
+        change_error_text("");
+        res = Response::redirect("/showtripslistpage");
+    }
+    catch(std::runtime_error &er)
+    {
+        change_error_text(er.what());
+        res = Response::redirect("/reqtripslist");
+    }
+    
+    return res;
+}
+
+Interface::TripsListPageHandler::TripsListPageHandler() {};
+Response *Interface::TripsListPageHandler::callback(Request *req)
+{
+    Response *res = new Response;
+    change_error_text("");
+    res = Response::redirect("/showtripslist");
+    return res;
+}
+
+Interface::ShowTripsListHandler::ShowTripsListHandler(Utaxi *utaxi_) { utaxi = utaxi_; };
+Response *Interface::ShowTripsListHandler::callback(Request *req)
+{
+    Response *res = new Response;
+    res->setHeader("Content-Type", "text/html");
+    std::cout << "----!!!!!!---" << utaxi->get_trips().size() << std::endl;
+    res->setBody(req_trips_list_html(utaxi->get_trips()));
+    return res;
+}
+
+Interface::AcceptTripHandler::AcceptTripHandler(Utaxi *utaxi_) { utaxi = utaxi_; }
+Response *Interface::AcceptTripHandler::callback(Request *req)
+{
+    Response *res = new Response;
+    TripIntractTokens new_accept;
+    new_accept.username = req->getBodyParam("username");
+    new_accept.id = (req->getBodyParam("id") == "" ? -1 : stoi(req->getBodyParam("id")));
+    try
+    {
+       utaxi->accept(new_accept);
+       change_error_text(new_accept.username + " accepted trip " + std::to_string(new_accept.id));
+    }
+    catch(std::runtime_error &er)
+    {
+        change_error_text(er.what());
+    }
+    res = Response::redirect("/showtripslist");
+
+    return res;
+}

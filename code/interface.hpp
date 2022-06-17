@@ -16,7 +16,6 @@ class Interface
         void server_js(MyServer &server);
         void server_images(MyServer &server);
         void server_handlers(MyServer &server);
-
         class SignupPageHandler : public RequestHandler
         {
             public:
@@ -84,6 +83,47 @@ class Interface
         {
             public:
                 FinishTripHandler(Utaxi *utaxi_);
+                Response *callback(Request *req);
+            private:
+                Utaxi *utaxi;
+        };
+
+        class ReqTripsListPageHandler : public RequestHandler
+        {
+            public:
+                ReqTripsListPageHandler();
+                Response *callback(Request *req);
+        };
+
+        class ReqTripsListHandler : public RequestHandler
+        {
+            public:
+                ReqTripsListHandler(Utaxi *utaxi_);
+                Response *callback(Request *req);
+            private:
+                Utaxi *utaxi;
+        };
+
+        class TripsListPageHandler : public RequestHandler
+        {
+            public:
+                TripsListPageHandler();
+                Response *callback(Request *req);
+        };
+
+        class ShowTripsListHandler : public RequestHandler
+        {
+            public:
+                ShowTripsListHandler(Utaxi *utaxi_);
+                Response *callback(Request *req);
+            private:
+                Utaxi *utaxi;
+        };
+
+        class AcceptTripHandler : public RequestHandler
+        {
+            public:
+                AcceptTripHandler(Utaxi *utaxi_);
                 Response *callback(Request *req);
             private:
                 Utaxi *utaxi;

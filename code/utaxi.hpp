@@ -25,19 +25,21 @@ class Utaxi
 
         void signup(SignupCredentials new_signup);
         void post_trips(TripRequestTokens new_trip_tokens);
-        void accept();
+        void accept(TripIntractTokens new_accpet_tokens);
         void finish(TripIntractTokens new_finish_tokens);
-        void trips_list();
-        void trip_data();
+        void trips_list(TripIntractTokens new_trips_list_tokens);
+        void trip_data(TripIntractTokens new_trip_data_tokens);
         void delete_trip(TripIntractTokens new_delete_trip_tokens);
 
         int get_cost(TripRequestTokens new_cost_tokens);
         int get_trips_count() { return trips_counter; }
         std::vector<Location*> get_locs() { return database.get_locs(); }
+        std::vector<Trip*> get_trips() { return target_trips; }
     private:
         InputControl input;
         OutputControl output;
         Database database;
+        std::vector<Trip*> target_trips;
         int trips_counter;
 
         void check_signup_role(std::string role);
