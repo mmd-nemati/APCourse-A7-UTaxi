@@ -29,8 +29,9 @@
                 <form action="/tripslist" method="post">
                     <h4><p class="box-head">Trips List</p></h4>
                     <br>
-                    <input name="username" id="username" type="text" placeholder="Username"/>
-                    <br><br>
+                    <input name="username" id="username" type="text" placeholder="Username" required/>
+                    <br>
+                    <label for="username" id="required">*required</label><br><br>
                     <input name="id-check" id="no-id" type="radio" value="no-id" />
                     <label for="no-id" class="description">No ID</label>
                     <input name="id-check" id="with-id" type="radio" value="with-id" />

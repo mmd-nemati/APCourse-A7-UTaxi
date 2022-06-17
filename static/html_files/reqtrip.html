@@ -28,7 +28,8 @@
             <div class="form">
                 <h4><p class="box-head">Request Trip</p></h4><br>
                 <form action="/reqtrip" method="post">
-                    <input name="username" id="username" type="text" placeholder="Username"/><br><br>
+                    <input name="username" id="username" type="text" placeholder="Username" required/><br>
+                    <label for="username" id="required">*required</label><br><br>
                     <label for="origin">Origin: </label>
                     <select name="origin" id="origin">
                         <option value="" class="loc">choose origin</option>

@@ -26,7 +26,8 @@
             <div id="sform">
                 <form action="/signup" method="post">
                     <h4><p class="box-head">Sign up</p></h4><br>
-                    <input name="username" id="username" type="text" placeholder="Username"/><br><br>
+                    <input name="username" id="username" type="text" placeholder="Username" required/><br>
+                    <label for="username" id="required">*required</label><br><br>
                     <input name="role" id="pass" type="radio" value="passenger" checked="checked"/>
                     <label for="pass">Passenger</label>
                     <input name="role" id="driver" type="radio" value="driver" />

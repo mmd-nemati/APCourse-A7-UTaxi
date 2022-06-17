@@ -28,7 +28,8 @@
             <div class="form">
                 <form action="/finishtrip" method="post">
                     <h4><p class="box-head">Finish Trip</p></h4><br>
-                    <input name="username" id="username" type="text" placeholder="Username"/><br><br>
+                    <input name="username" id="username" type="text" placeholder="Username" required/><br>
+                    <label for="username" id="required">*required</label><br><br>
                     <label for="trip-id">Trip ID: </label>
                     <input name="id" id="trip-id" type="number" min="0" value="0"/><br>
                     <input  id="submit" type="submit" value="Submit"/>

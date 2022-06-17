@@ -32,3 +32,8 @@ body {
     background-color: #173d19;
     color: white;
 }
+
+label#required {
+    color: rgb(173, 5, 5);
+    font-family: "Verdana";
+}
