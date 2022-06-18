@@ -39,6 +39,8 @@ std::string req_trips_list_html(const std::vector<Trip*> &trips)
     body += line;
     for(int i = 0; i < trips.size(); ++i)
     {
+        if(trips[i]->get_status() == "deleted")
+            continue;
         body += "<tr>";
         body += ("<td>" + std::to_string(trips[i]->get_id()) + "</td>");
         body += ("<td>" + trips[i]->get_passenger()->get_username() + "</td>");
@@ -48,6 +50,8 @@ std::string req_trips_list_html(const std::vector<Trip*> &trips)
         body += ("<td>" + std::to_string(int(trips[i]->get_price())) + "</td>");
         if(trips[i]->get_status() == "waiting")
             body += ("<td><input type=\"radio\" name=\"id\" value=\"" + std::to_string(trips[i]->get_id()) + "\"/></td>");
+        else
+            body += "<td></td>";
         body += "</tr>";
     }
 

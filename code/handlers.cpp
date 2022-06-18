@@ -200,7 +200,6 @@ Response *Interface::ShowTripsListHandler::callback(Request *req)
 {
     Response *res = new Response;
     res->setHeader("Content-Type", "text/html");
-    std::cout << "----!!!!!!---" << utaxi->get_trips().size() << std::endl;
     res->setBody(req_trips_list_html(utaxi->get_trips()));
     return res;
 }
@@ -215,7 +214,7 @@ Response *Interface::AcceptTripHandler::callback(Request *req)
     try
     {
        utaxi->accept(new_accept);
-       change_error_text(new_accept.username + " accepted trip " + std::to_string(new_accept.id));
+       change_error_text(new_accept.username + " " + "accepted trip" + " " +std::to_string(new_accept.id));
     }
     catch(std::runtime_error &er)
     {
