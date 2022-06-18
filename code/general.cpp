@@ -38,9 +38,9 @@ bool has_cost_sort(std::vector<std::string> tokens)
 }
 
 void change_error_text(std::string err_text) {
-  std::ofstream js_err;
-  js_err.open("static/js_files/error.js");
-  if (err_text == "") js_err << " ";
-  else js_err << "alert(\'" << err_text << "\');";
-  js_err.close();
+    std::ofstream js_err;
+    js_err.open("static/js_files/error.js");
+    if (err_text == "") js_err << " ";
+    else js_err << "alert(\'" << err_text << "\');";
+    js_err.close();
 }

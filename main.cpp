@@ -9,6 +9,5 @@ int main(int argc, char *argv[])
     Interface interface;
     interface.run(argv);
 
-
     return 0;
 }

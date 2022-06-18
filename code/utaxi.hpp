@@ -6,8 +6,6 @@
 #include "database.hpp"
 #include "data_reader.hpp"
 #include "location.hpp"
-#include "input_control.hpp"
-#include "output_control.hpp"
 #include "member.hpp"
 #include "driver.hpp"
 #include "passenger.hpp"
@@ -18,10 +16,6 @@ class Utaxi
     public:
         Utaxi();
         void gather_loc_data(std::string file_address);
-        void run_u();
-        void post_u();
-        void get_u();
-        void web_delete();
 
         void signup(SignupCredentials new_signup);
         void post_trips(TripRequestTokens new_trip_tokens);
@@ -36,8 +30,6 @@ class Utaxi
         std::vector<Location*> get_locs() { return database.get_locs(); }
         std::vector<Trip*> get_trips() { return target_trips; }
     private:
-        InputControl input;
-        OutputControl output;
         Database database;
         std::vector<Trip*> target_trips;
         int trips_counter;
